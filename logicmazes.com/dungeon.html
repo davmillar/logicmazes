@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><HTML>
+<HEAD><TITLE>Dungeon Mazes</TITLE>
+
+<style type="text/css">
+
+body {background-color: #fffffa}
+
+h2 {font: bold 30px "Arial", "Helvetica",sans-serif;color:#1000E8; margin: 0 0 42}
+p {font: 18px/125% sans-serif; margin-top: 0; }
+p.heading {font: bold 14px "Arial", sans-serif; margin: 0 0 44}
+
+span {font: bold 19px "Arial", "helvetica", sans-serif; color: #E80020}
+
+</style>
+
+</HEAD><body>
+<p class=heading>Posted: March 28, 2008<br>
+Revised: June 3, 2008</p>
+
+ 
+<center>
+<h2>Dungeon Mazes</h2>
+
+
+<TABLE width=68% BORDER=0 CELLPADDING=0 CELLSPACING=0><tr><td>
+
+<p>This section has diagrams for two Dungeon Mazes. The implementation of these&nbsp;mazes has been rather spotty in the past, as I explain in the section <i><b>Implementation</b></i>. That section also describes my hoped-for (and probably impossible) implementations in the future.</p>
+
+<p>You might enjoy solving these mazes just from the diagrams. However, the diagrams are a little complicated, so first you should imagine what it would be like&nbsp;to&nbsp;be in a full-sized version of the maze. And while you&#146;re doing that, you might&nbsp;as well imagine (as I frequently do) that a large entertainment company has&nbsp;spent about $100,000 on building an grand version of the maze.</p>
+
+<p>After you enter this grand maze, you travel down a corridor towards a room. At the entrance to the room you would see a sign that says something like, &#147;Take Exit&nbsp;1 or Exit&nbsp;2.&#148; You go through the entrance and find yourself in a large ornate room. You look around and see there are four exits. Above the exits are four signs that read <B>Exit&nbsp;1</b>, <B>Exit&nbsp;2</b>, <B>Exit&nbsp;3</b>, and <B>Exit&nbsp;4</B>. You remember the sign at the entrance, so you know you must leave by Exit&nbsp;1 or Exit&nbsp;2. You chose one of these exits and travel through it. You are now in another corridor that leads to another room. At the entrance to that room is a sign that reads, &#147;Take Exit&nbsp;B or Exit&nbsp;C.&#148; And so on.</p> 
+
+<p>Here are the two diagrams:</p>
+
+<p><A HREF="dunge00.html">The first Dungeon Maze</A></p>
+
+<p><A HREF="dunge01.html">The second Dungeon Maze</A></p>
+
+<p>The diagrams are rather cluttered, so when you travel through them, make sure you know which sign to obey. You should obey a sign that is on the right side of your corridor (that is, <I><B>right</B></I> according to the direction you are now travelling in). Ignore all the signs on the left side of your corridor.</p>
+
+<p><span>Implementation:</span>&nbsp; These mazes were previously only available in my catalog of walk-through logic mazes. That catalog is subscribed to mostly by owners of cornfield mazes. The Dungeon Mazes were implemented in a few places, but the implementations were a disappointment. One just used strings on poles to define the rooms. One cut the rooms out of a corner of the cornfield, but the rooms were too small. This implementation might have worked if the rooms had been larger&#151;say, about the size of living rooms.</p>
+
+<p>I figured that maybe the best place for Dungeon mazes was not alongside cornfield mazes. So I moved the diagrams to this page, where they would be generally available.</p>
+
+<p>One place I would think a Dungeon Maze might be implemented is at a convention for gamers, or any convention for us smart people. If a large enough area is available, corridors and rooms could be outlined on the floor with tape. Someone is&nbsp;currently working on that idea. A very ambitious implementation would be a Dungeon Maze built like a fence maze, maybe with a second storey, and with corridors or stairs connecting the rooms. A Dungeon maze could also be part of a Haunted House attraction. There could be a separate entrance that took you down to the dungeon, and the rooms of the maze could actually look like dungeons.</p>
+
+<a name=hist>
+
+<p><span>History of the Dungeon Maze and the Bureaucratic Maze:</span>&nbsp; These two mazes look nothing like each other, but they share an underlying mechanism. That mechanism goes back as far as the Colossal Cave, a part of <I><B>Adventure</B></I>, the first computer adventure game. It was written in 1972 by William Crowther, and it ran on the <nobr>PDP-10.</nobr> For a complete history, see this <A HREF="http://www.rickadams.org/adventure/a_history.html">page</A>. In the Colossal Cave, what entrance you took into a room determined what exit you could take out of the room. It was therefore a multi-state maze. The state you are in was not just determined by where you were but also by how you got there.</p>
+
+<p>After personal computers appeared, there were many adventure programs. The one that I played (for many months) was <I><B>Adventureland</B></I>, written for the TRS-80 by Scott Adams. Every one of these programs had a maze similar to the Colossal Cave (but towards the end of the 1990s, along with greater use of graphics, these mazes appeared less frequently).</p>
+
+<p>In 2000 I had what I thought was a brilliant idea: if people liked the mazes in adventure games on computers, they would really like a version they could actually walk through. This was my Dungeon Mazes and they only got a so-so reception. In 2003 I had another brilliant idea: the <A HREF="bur.html">Bureaucratic Maze</A>. That idea had some successful implementations. It seemed to be nothing like a maze, but if you look at it closely, you can see it is very much like the Colossal Cave. In the Bureaucratic Maze you carry a form that says &#147;Take this to <I><B>Human Resources</B></I> or <I><B>Marketing</B></I>.&#148; In the Colossal Cave you are in a room where the exits are <I><B>north</B></I> or <I><B>east</B></I>. In the Bureaucratic Maze, you hand your form to a bureaucrat who reads a code on the form that indicates where it came from. That code tells him what form to give you next. In the Colossal Cave you chose an exit and then find yourself in another chamber and the set of possible exits was determined by what chamber you came from. This is getting to be a little hard to explain, because I&#146;m getting confused myself.</p>
+
+<p><HR></p>
+
+<p><A HREF="index.html">Back to the home page</A></p>
+
+</td></tr></TABLE><BR><br>
+
+</BODY>
+</HTML>
+

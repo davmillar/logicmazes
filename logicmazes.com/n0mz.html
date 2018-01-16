@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><HTML>
+<HEAD><TITLE>Easy 5</TITLE>
+
+<style type="text/css">
+
+h1 {font: bold 26px "Arial", "Helvetica", sans-serif; color: #1000E8; margin: 0 0 30}
+p {font: 18px/125% "Verdana", sans-serif; margin-top: 0; }
+p.red {font: 20px "Arial", sans-serif; margin-top: 0; COLOR: #F00000}
+</style>
+
+<SCRIPT LANGUAGE=JAVASCRIPT>
+
+var turnOff = 1
+var solution = 0
+var redRow = 0
+var redCol = 0
+
+/* board:  This is a two-dimensional array used to control the maze. It is 
+accessed by [row number][column number]. */
+
+var board = new Array(5)
+
+// initNumbs: This has the numbers for board. (Ignore that first zero.)
+var initNumbs = new Array(0,
+4,2,2,3,3,
+2,2,2,2,2,
+3,2,2,2,2,
+1,2,3,2,3,
+3,2,2,2,9)
+
+function loadBoard() {
+n = 1
+for (rowz = 0; rowz < 5; rowz++) {
+board[rowz] = new Array(5)
+   for (colz = 0; colz < 5; colz++) {
+   board[rowz][colz] = initNumbs[n]
+   n++
+   }
+}
+return}
+
+loadBoard()
+
+/* s:  This is the mainline of the program.  When you click on a number, the 
+event handler calls this routine, and it passes the coordinates for the square 
+in the board array. */
+
+function s(rowx,colx) {
+
+
+rowDif = Math.abs(redRow - rowx)
+colDif = Math.abs(redCol - colx)
+
+if (rowDif + colDif == 0) {alert("No, no! Don't click on the RED square.    \rClick on the square you're moving TO.");return}
+
+if (rowDif > 0 && colDif > 0) {
+bigX(rowx,colx)
+alert("You can't go to that square.\rIt is not on the same horizontal row or the    \rsame vertical column as the red square.")
+norm(rowx,colx)
+return}
+
+if (colDif+rowDif != board[redRow][redCol]) {
+bigX(rowx,colx)
+
+toMove = board[redRow][redCol]+" squares"
+if (board[redRow][redCol] == 1) toMove = "1 square"
+
+alert("You can't go to that square.\rIt is not "+toMove+" horizontally or    \rvertically from the red square.")
+norm(rowx,colx)
+return}
+
+norm(redRow,redCol)
+red(rowx,colx)
+redRow=rowx
+redCol=colx
+if (board[rowx][colx] != 9) return
+
+turnOff = 0
+document.solvedit.src="z/solved.gif"
+return}
+
+// norm:  This sets a square to display its original gif
+function norm(rown,coln) {numinsq = board[rown][coln]
+color = "b"
+if ((rown+coln)%2 == 1) {color = "g"}
+
+document.images[rown*5+coln].src="z/"+color+numinsq+".gif"
+return}
+
+// red:  This sets a square to display a red number
+function red(rowr,colr) {numinsq = board[rowr][colr]
+document.images[rowr*5+colr].src="z/r"+numinsq+".gif"
+return}
+
+// bigX:  This sets a square to display a big X
+function bigX(rowb,colb) {
+document.images[rowb*5+colb].src="z/x.gif"
+return}
+
+
+function reset() {
+turnOff = 1
+solution = 0
+
+redRow=0;redCol=0
+setTimeout("reset2()",51)
+return}
+
+function reset2() {
+for (rowu = 0; rowu < 5; rowu++) {
+   for (colu = 0; colu < 5; colu++) {norm(rowu,colu)}
+}
+document.solvedit.src="padding.gif"
+red(0,0)
+return}
+
+var solPtr = 0
+var delay = 2000
+
+function sol() {
+reset()
+solution = 1
+delay = 2000
+setTimeout("showSol()",1200)
+solPtr=0
+return}
+
+function showSol() {
+if(solution==0) {return}
+red(solTbl[solPtr],solTbl[solPtr+1])
+solPtr+=2
+if(solTbl[solPtr]==99) {return}
+setTimeout("showSol()",delay)}
+
+var solTbl = new Array(4,0,
+1,0,
+1,2,
+3,2,
+0,2,
+2,2,
+4,2,
+4,4,99)
+
+</SCRIPT>
+
+</HEAD><BODY BGCOLOR=#FFFFFa>
+
+<NOSCRIPT>
+<p class=red>This maze won't work, because you need to have JavaScript enabled.</P>
+
+<p class=red>If you're using Internet Explorer, it can be tricky trying to figure out how to enable JavaScript. Here's a hint: IE doesn't even call it "JavaScript." Instead, they call it "active content" or "Active Scripting" or "Scripting."</p>
+</NOSCRIPT>
+
+<center>
+
+<TABLE width=740 CELLPADDING=0 CELLSPACING=0><tr><td>
+
+<h1>Easy Maze 5:</h1>
+
+<p>This is a &#147;Number Maze,&#148; and it is interactive.</p>
+
+<p>You begin on the square at the upper left, and your current position is always shown in red. You have to make a series of moves that will take you to the square marked <I><B>Goal</B></I>. The number in each square indicates how far you must move&#151;horizontally or vertically&#151;when you leave the square. When you decide what square you want to move to, click on that square.<br><br>&nbsp;</p>
+
+<center>
+
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+
+<TR><TD><A HREF=javascript:s(0,0)><IMG SRC="z/r4.gif" NAME="r0c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,1)><IMG SRC="z/g2.gif" NAME="r0c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,2)><IMG SRC="z/b2.gif" NAME="r0c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,3)><IMG SRC="z/g3.gif" NAME="r0c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,4)><IMG SRC="z/b3.gif" NAME="r0c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD></TR>
+
+<TR><TD><A HREF=javascript:s(1,0)><IMG SRC="z/g2.gif" NAME="r1c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,1)><IMG SRC="z/b2.gif" NAME="r1c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,2)><IMG SRC="z/g2.gif" NAME="r1c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,3)><IMG SRC="z/b2.gif" NAME="r1c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,4)><IMG SRC="z/g2.gif" NAME="r1c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+
+<TD></FONT><FONT FACE="Times New Roman" SIZE=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="javascript:reset()"></FONT><FONT FACE=arial COLOR=BLUE SIZE=2><b>Click here<BR>to restart</b></A></TD></TR>
+
+<TR><TD><A HREF=javascript:s(2,0)><IMG SRC="z/b3.gif" NAME="r2c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,1)><IMG SRC="z/g2.gif" NAME="r2c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,2)><IMG SRC="z/b2.gif" NAME="r2c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,3)><IMG SRC="z/g2.gif" NAME="r2c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,4)><IMG SRC="z/b2.gif" NAME="r2c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD><tr>
+
+
+<TR><TD><A HREF=javascript:s(3,0)><IMG SRC="z/g1.gif" NAME="r3c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,1)><IMG SRC="z/b2.gif" NAME="r3c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,2)><IMG SRC="z/g3.gif" NAME="r3c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,3)><IMG SRC="z/b2.gif" NAME="r3c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,4)><IMG SRC="z/g3.gif" NAME="r3c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD></TR>
+
+
+<TR><TD><A HREF=javascript:s(4,0)><IMG SRC="z/b3.gif" NAME="r4c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,1)><IMG SRC="z/g2.gif" NAME="r4c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,2)><IMG SRC="z/b2.gif" NAME="r4c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,3)><IMG SRC="z/g2.gif" NAME="r4c3" WIDTH=40 HEIGHT=40 HSPACE=1  VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,4)><IMG SRC="z/b9.gif" NAME="r4c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+
+<TD COLSPAN=2></FONT><FONT FACE="Arial" SIZE=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG SRC="padding.gif" WIDTH=90 HEIGHT=40 VSPACE=1 HSPACE=0 NAME="solvedit"></TD></TR>
+
+</TABLE><BR><BR><BR>
+
+</center>
+
+<p><A HREF="javascript:sol()">Click here for the solution</A>.</p>
+<p><br>In Easy Maze 4, I mentioned that there were some precedents to my &#147;mazes-<wbr>with-rules.&#148; This basic number-maze rule is one of those precedents. It goes back&nbsp;at least as far as a puzzle Sam Loyd published in 1898.</p>
+
+<p>I have <A HREF="index.html#num">four other number mazes</A> on my site. If you want to learn more about number mazes in general, here is a <A HREF="http://cs.gettysburg.edu/~tneller/rjmaze/index.html">great site</A> for that.</p>
+
+<p><br><A HREF="easy/maze1.html">Back to Easy Maze 1</A>.</p>
+
+<p><A HREF="index.html">Back to the home page</A>.</p>
+
+</td></tr></TABLE><BR>
+
+<script language="JavaScript">
+
+// This is here just to pre-load some GIFs.
+dummy1 = new Image(40,40);dummy1.src="z/x.gif"
+dummy2 = new Image(40,40);dummy2.src="z/r1.gif"
+dummy3 = new Image(40,40);dummy3.src="z/r2.gif"
+dummy4 = new Image(40,40);dummy4.src="z/r3.gif"
+dummy5 = new Image(40,40);dummy5.src="z/r4.gif"
+dummy6 = new Image(40,40);dummy6.src="z/b4.gif"
+dummy7 = new Image();dummy7.src="z/solved.gif"
+dummy8 = new Image(40,40);dummy8.src="z/r9.gif"
+</script>
+
+</BODY>
+</HTML>
+
+

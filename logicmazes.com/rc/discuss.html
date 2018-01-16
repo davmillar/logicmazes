@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><HTML>
+<HEAD><TITLE>Further Discussion of Buchin's Maze</TITLE>
+<style type="text/css">
+
+body {background-color: #FFFFFA }
+
+h1 {font: bold 32px "Arial", "Helvetica", sans-serif; color: #1000E8; margin: 0 0 9}
+
+p {font: 18px "Verdana", sans-serif; margin-top: 0; }
+p.link {font: bold 17px "Arial", sans-serif; margin-top: 0; }
+
+table.var {width: 78%}
+
+</style>
+
+<style type="text/css" media="print">
+
+table.var {width: 100%}
+p {font: 14pt "Times New Roman", serif; margin-top: 0; }
+.onlyscreen {display:none}
+ 
+</style>
+
+</HEAD><BODY>
+
+
+<center>
+
+<H1>Further Discussion of Buchin&#146;s Maze&nbsp;&nbsp;&nbsp;</FONT></H1><br>
+
+
+<TABLE BORDER=0 WIDTH=100% CELLPADDING=0 CELLSPACING=0>
+<TR><TD valign=top><br>
+<IMG SRC="parity.gif"></TD>
+
+<TD width=20></TD>
+<TD>
+
+<p>Suppose you placed a die on the square marked <b>START</b> in the board at the left, and you position the die so the <b>6</b> is on top and the <b>4</b> faces you. From that position you could roll the die two squares right, two squares down, two squares left, then two squares up, and the die will be back in its original position: the <b>6</b> is on top and the <b>4</b> faces you. You could also roll around a more complicated pattern and come back with the <b>6</b> on top and the <b>3</b> facing you (imagine that the board extends indefinitely in all directions, so you can roll around in very complicated patterns). Or you can roll around other patterns and come back with any other number on top. What you <I><B>CAN NOT DO</B></I>, no matter where you roll, is come back to the starting square with the <b>6</b> on top and the <b>5</b> facing you. You also can&#146;t get the <b>6</b> on top and the <b>2</b> facing you.</p>
+
+<p>Next, suppose you begin with your starting position, roll around a complex pattern, and then end on the square that is immediately to the right of <b>START</b>. It is possible to end on that square with the <b>6</b> on top and the <b>5</b> facing you, or you could end with the <b>6</b> on top and the <b>2</b> facing you; however, you <I><B>CAN NOT</B></I> end with the <b>6</b> on top and the <b>4</b> or <b>3</b> facing you. In general, on any square of this board there are 12 positions of the die that are possible and 12 positions that are impossible. Also, what is possible in a square is impossible in its immediate neighbor, and what is impossible in the square, is possible in its immediate neighbor.</p><p>&nbsp;</p></td>
+
+<td width=3%><td>
+
+</td></tr></TABLE>
+
+<TABLE BORDER=0 class=var CELLPADDING=0 CELLSPACING=0><tr><td>
+
+<p>I had run across these restrictions when I was designing rolling cube mazes. I explained them as &#147;something weird is happening with parity.&#148; That made sense to me because parity pops up in other puzzles, especially puzzles about tiling a surface. And actually &#147;something weird with parity&#148; is the best explanation I can come up with for this phenomenon.</p>
+
+<p><I><B>On Rolling Cube Puzzles</B></I> discusses the parity property of cube mazes and mentions that, because it reduces the possible positions of a cube, it also reduces the computational complexity of analyzing the mazes.</p>
+
+<p>Kevin Buchin and I had an e-mail discussion about parity, and we considered a way that a maze could overcome the parity restriction. He took this idea and created his maze. The main feature of the maze is that if you travel across the row at the top, or the row at the bottom, you will change the parity of the die. I&#146;ll leave it to you to figure out why this happens. Once you change the parity, there are places you can go that you couldn&#146;t go to before. The central area of this maze has a denser set of paths than in other rolling cube mazes.</p>
+
+<p>What I wonder is: could you overcome the parity restrictions in other types of puzzles? I don&#146;t really know.</p>
+
+<p>Here is an overview of the solution to the maze: The true path first goes to the large square at the upper right and then left across the top row. It is now in the changed parity state. Next it travels around the central portion of the maze, going over the Start square, going around a tricky loop, and ending up on the large square at the lower right. It then goes across the lower row and is back to the original parity state. Next it goes up to the large square at the upper left, then goes right across the top row, and it is now back in the changed parity state. It is now a short trip to the Goal.</p>
+
+
+<p><hr></p>
+
+<p class=link><A HREF="cubes.html#cccg">Back to the rules of the maze</I></A><BR>
+<A HREF="../index.html">Back to the home page</A>
+
+
+</td></tr></TABLE><BR>
+</BODY>
+</HTML>
+

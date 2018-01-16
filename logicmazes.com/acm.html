@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><HTML>
+<HEAD><TITLE>ACM Programming Contest</TITLE></HEAD>
+<BODY BGCOLOR=#FFFFF0>
+
+<CENTER><FONT FACE="Arial"><BR><H2>ACM Programming Contest</H2>
+
+<TABLE BORDER=0 WIDTH=84% CELLPADDING=3 CELLSPACING=0><tr><td>
+<FONT FACE="Arial" SIZE=3><B>
+
+ACM (the initials stand for the Association for Computing Machinery) is the professional organization for computer programmers and for teachers of computer science. Every year they hold an International Collegiate Programming Contest. During 1999, over 2400 teams from 2000 universities competed in regional contests. Sixty teams were selected for the final contest held in Orlando, Florida on March 18, 2000.</B>
+
+</TABLE><BR CLEAR=ALL>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 WIDTH=92% ALIGN=RIGHT>
+<TR VALIGN=TOP>
+<TD><FONT FACE="Arial" SIZE=3><B>
+
+The teams in the final contest had to write programs to solve eight problems. The first problem was called &#147;Abbott&#146;s Revenge&#148; and was based on my walk- through arrow mazes that the American Maze company constructed over the last two summers. The picture here shows one of these mazes. At each intersection you must follow an arrow on the sign at your right.<P>
+
+The problem was to write a program that would solve any maze that has the same rules as these arrow mazes. After a team writes their program, the judges give the program a file that contains descriptions of several different maze layouts and different arrow signs. If the program is able to solve all the mazes, then the team has passed this part of the test. One fiendish twist is that some of the mazes have no solutions and the program must then print &#147;No solution possible.&#148; (It would be pretty funny to have a real walk-through maze that has no solution.)</B>
+
+</TD>
+<TD><FONT FACE="Times New Roman" SIZE=3>&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+<TD><IMG SRC="arrow5.jpg" ALT="Arrow maze at Camarillo, California" WIDTH=281 HEIGHT=388 HSPACE=0>
+</TD></TR></TABLE><BR CLEAR=ALL><BR>
+
+
+
+<TABLE BORDER=0 WIDTH=84% CELLPADDING=0 CELLSPACING=0><tr><td>
+<FONT FACE=arial SIZE=3><B>
+
+Here are pointers to ACM sites:<P>
+<UL>
+<LI><A HREF="http://www.acm.org/">This is the main site</A>.<P>
+
+<LI><A HREF="http://icpc.baylor.edu/icpc/">This is the site devoted to the programming contest</A>.<P>
+
+<LI><A HREF="http://icpc.baylor.edu/Past/icpc2000/Finals/problems.pdf">This is the complete write-up of the problem set</A>, as it was presented to the contestants. If you click there, you&#146;ll need the Adobe Acrobat Reader plug-in (and if you don&#146;t have it, Adobe will, of course, be happy to download it to you).<P>
+</UL>
+The following is the first three pages of the problem set (I copied these pages then converted them to HTML for easier display). These are the pages that contain &#147;Abbott&#146;s Revenge.&#148; The display here is easier to read, though if you want to print anything you&#146;ll do better accessing the file from the ACM site.<P>
+
+You&#146;ll probably want to skim over some of the technical parts here (even if you understand them). At the end I added &#147;Further Notes from Abbott.&#148; No skimming is allowed in that section.
+
+</B><P><HR>
+</TABLE><BR><BR>
+
+
+
+
+</FONT><FONT FACE=arial SIZE=2>The 2000 24th Annual</FONT><FONT FACE=arial SIZE=6> <B>acm</B> </FONT><FONT FACE=arial SIZE=2>International Collegiate<BR>
+</FONT><FONT FACE=arial SIZE=5><B>Programming Contest World Finals</B><BR>
+</FONT><FONT FACE=arial SIZE=4><B>sponsored by IBM</B><BR>
+</FONT><FONT FACE=arial SIZE=1><BR>
+</FONT><FONT FACE=arial SIZE=5>Problem A<BR>
+</FONT><FONT FACE=arial SIZE=4>Abbott&#146;s Revenge<BR>
+</FONT><FONT FACE=arial SIZE=3>Input File: abbott.in<P>
+
+<TABLE BORDER=0 WIDTH=80% CELLPADDING=0 CELLSPACING=0><tr><td>
+<FONT FACE="Times New Roman" SIZE=4>
+The 1999 World Finals Contest included a problem based on a &#147;dice maze.&#148; At the time the problem was written, the judges were unable to discover the original source of the dice maze concept. Shortly after the contest, however, Mr. Robert Abbott, the creator of numerous mazes and an author on the subject, contacted the contest judges and identified himself as the originator of dice mazes. We regret that we did not credit Mr. Abbott for his original concept in last year&#146;s problem statement. But we are happy to report that Mr. Abbott has offered his expertise to this year&#146;s contest with his original and unpublished &#147;walk-through arrow mazes.&#148;<P>
+
+As are most mazes, a walk-through arrow maze is traversed by moving from intersection to intersection until the goal intersection is reached. As each intersection is approached from a given direction, a sign near the entry to the intersection indicates in which directions the intersection can be exited. These directions are always left, forward or right, or any combination of these.<P>
+
+Figure 1 illustrates a walk-through arrow maze. The intersections are identified as &#147;(row, column)&#148; pairs, with the upper left being (1,1). The &#147;Entrance&#148; intersection for Figure 1 is (3,1), and the &#147;Goal&#148; intersection is (3,3). You begin the maze by moving north from (3,1). As you walk from (3,1) to (2,1), the sign at (2,1) indicates that as you approach (2,1) from the south (traveling north) you may continue to go only forward. Continuing forward takes you toward (1,1). The sign at (1,1) as you approach from the south indicates that you may exit (1,1) only by making a right. This turns you to the east now walking from (1,1) toward (1,2). So far there have been no choices to be made. This is also the case as you continue to move from (1,2) to (2,2) to (2,3) to (1,3). Now, however, as you move west from (1,3) toward (1,2), you have the option of continuing straight or turning left. Continuing straight would take you on toward (1,1), while turning left would take you south to (2,2). The actual (unique) solution to this maze is the following sequence of intersections: (3,1) (2,1) (1,1) (1,2) (2,2) (2,3) (1,3) (1,2) (1,1) (2,1) (2,2) (1,2) (1,3) (2,3) (3,3).<P>
+
+You must write a program to solve valid walk-through arrow mazes. Solving a maze means (if possible) finding a route through the maze that leaves the Entrance in the prescribed direction, and ends in the Goal. This route should not be longer than necessary, of course.<P>
+
+</FONT><FONT FACE=arial SIZE=4><B>Input</B></FONT><FONT FACE="Times New Roman" SIZE=4><P>The input file will consist of one or more arrow mazes. The first line of each maze description contains the name of the maze, which is an alphanumeric string of no more than 20 characters. The next line contains, in the following order, the starting row, the starting column, the starting direction, the goal row, and finally the goal column. All are delimited by a single space. The maximum dimensions of a maze for this problem are 9 by 9, so all row and column numbers are single digits from 1 to 9. The starting direction is one of the characters N, S, E or W, indicating north, south, east and west, respectively.<P>
+
+All remaining input lines for a maze have this format: two integers, one or more groups of characters, and a sentinel asterisk, again all delimited by a single space. The integers represent the row and column, respectively, of a maze intersection. Each character group represents a sign at that intersection. The first character in the group is N, S, E or W to indicate in what direction of travel the sign would be seen. For example, S indicates that this is the sign that is seen when travelling south. (This is the sign posted at the north entrance to the intersection.) Following this first direction character are one to three arrow characters. These can be L, F or R indicating left, forward, and right, respectively.<P>
+
+The list of intersections is concluded by a line containing a single zero in the first column. The next line of the input starts the next maze, and so on. The end of input is the word END on a single line by itself.<P>
+
+</FONT><FONT FACE=arial SIZE=4><B>Output</B></FONT><FONT FACE="Times New Roman" SIZE=4><P>For each maze, the output file should contain a line with the name of the maze, followed by one or more lines with either a solution to the maze or the phrase &#147;No Solution Possible&#148;. Maze names should start in column 1, and all other lines should start in column 3, i.e., indented two spaces. Solutions should be output as a list of intersections in the format &#147;(R,C)&#148; in the order they are visited from the start to the goal, should be delimited by a single space, and all but the last line of the solution should contain exactly 10 intersections.<P>
+
+The first maze in the following sample input is the maze in Figure 1.
+
+</TABLE><BR><BR>
+
+<TABLE BORDER=1 RULES=ALL CELLPADDING=9 CELLSPACING=0>
+<TR><TH><FONT FACE=arial SIZE=4><B>Sample Input</B></TH><TH><FONT FACE=arial SIZE=4><B>Output for the Sample Input</B></TH></TR>
+
+<TR><TD><FONT FACE="Courier New" SIZE=2>
+
+SAMPLE<BR>
+3 1 N 3 3<BR>
+1 1 WL NR *<BR>
+1 2 WLF NR ER *<BR>
+1 3 NL ER *<BR>
+2 1 SL WR NF *<BR>
+2 2 SL WF ELF *<BR>
+2 3 SFR EL *<BR>
+0<BR><BR>
+NOSOLUTION<BR>
+3 1 N 3 2<BR>
+1 1 WL NR *<BR>
+1 2 NL ER *<BR>
+2 1 SL WR NFR *<BR>
+2 2 SR EL *<BR>
+0<BR>
+END</TD>
+
+<TD VALIGN=TOP><FONT FACE="Courier New" SIZE=2>
+
+SAMPLE<BR>
+(3,1) (2,1) (1,1) (1,2) (2,2) (2,3) (1,3) (1,2) (1,1)<BR>
+(2,1) (2,2) (1,2) (1,3) (2,3) (3,3)<BR><BR>
+NOSOLUTION<BR>
+No Solution Possible</TD></TR></TABLE><BR><BR>
+
+<IMG HSPACE=0 VSPACE=11 SRC="acmfig1.gif" WIDTH=316 HEIGHT=304><BR CLEAR=YES>
+</FONT><FONT FACE=arial SIZE=2><B>Figure 1: An Example Walk-Through Arrow Maze</B><BR><BR><BR>
+
+
+<IMG HSPACE=0 VSPACE=11 SRC="acmfig2.gif" WIDTH=457 HEIGHT=427><BR CLEAR=YES>
+</FONT><FONT FACE=arial SIZE=2><B>Figure 2: Robert Abbott&#146;s Atlanta Maze</B><BR><BR><BR>
+
+
+<TABLE BORDER=0 WIDTH=80% CELLPADDING=0 CELLSPACING=0><tr><td>
+<FONT FACE="Times New Roman" SIZE=4>
+
+Robert Abbott&#146;s walk-through arrow mazes are actually intended for large-scale construction, not paper. Although his mazes are unpublished, some of them have actually been built. One of these is on display at an Atlanta museum. Others have been constructed by the American Maze Company over the past two summers. As their name suggests these mazes are intended to be walked through.<P>
+
+For the adventurous, Figure 2 is a graphic of Robert Abbott&#146;s Atlanta maze. Solving it is quite difficult, even when you have an overview of the entire maze. Imagine trying to solve this by actually walking through the maze and only seeing one sign at a time! Robert Abbott himself indicated that the maze is too complex and most people give up before finishing. Among the people that did not give up was Donald Knuth: it took him about thirty minutes to solve the maze.
+
+<P><HR><P>
+
+</FONT><FONT FACE=arial SIZE=4><B>
+
+<FONT FACE=arial>Further Notes from Abbott:</B><P>
+
+</FONT><FONT FACE=arial SIZE=3><B>
+
+The diagram of my Atlanta maze came out well, and I hope you try to solve the maze. At each intersection you must choose an arrow from the first set of arrows you come to (that&#146;s the set of arrows you reach before you reach the dot). You must ignore the other sets of arrows around the dot.<P>
+
+This is the first time that a map of that maze has been displayed. I had avoided printing it anywhere because it&#146;s hard to diagram and it&#146;s also hard to explain. You might have noticed that the previous paragraph is a little confusing, but I can&#146;t think of a better way to write about that maze. Actually, this maze is easier to understand when you walk through it than when you look at a map of it.<P>
+
+The maze appeared in the Atlanta International Museum of Art and Design from January through April of 1993. It is not (as the ACM write-up said) currently in an Atlanta museum. But I keep hoping that someday my mazes will appear in another museum.<P>
+
+ACM&#146;s use of my maze gave me the idea that there might be some sort of connection between computer programs and logic mazes. I don&#146;t really know what the connection is, but most of the people I know who create logic mazes also work as computer programmers. Here is a partial list: <A HREF="http://www.mathpuzzle.com/">Ed Pegg, Jr.</A>, <A HREF="http://www.clickmazes.com/">Andrea Gilbert</A>, <A HREF="http://www.tnelson.demon.co.uk">Toby Nelson</A>, <A HREF="rb/column.html#tucker">Richard Tucker</A>, <A HREF="http://www.gamepuzzles.com//oriel.htm">Oriel Maxime</A>. I myself am a retired programmer (I worked mostly in assembler language on the old IBM 360). Others, like <A HREF="http://www.stetson.edu/~efriedma/">Erich Friedman</A> and <A HREF="http://www.scottkim.com/">Scott Kim</A>, don&#146;t work as programmers but they do write programs.<P>
+
+Some people are less interested in solving a logic maze than they are in creating an algorithm that will solve the maze. That is definitely part of the programmer mentality. And many programs have been written to solve mazes. Also, programs have been written to <I>create</I> mazes (I&#146;ve discussed this phenomenon on my site before, <A HREF="notes.html#nelson">at this location</A>). Theoretically we could have some programs create mazes then pass them to other programs that solve the mazes. We humans could then just sit around and do nothing.
+
+<P><HR><P>
+
+<A HREF="http://www.karrels.org/Ed/ACM/index.html">Click here</A> for an archive of previous ACM programming problems. This archive is by Ed Karrels, who adds the disclaimer, &#147;Not an official ACM page.&#148; Actually, I don&#146;t think you can get this information from the official ACM pages.<P>
+
+<A HREF="walkthru.html">To the section of my site that describes how the concept of walk-through logic mazes developed from 1993 through 1998</A>.<P>
+
+<A HREF="pics99x.html">Pictures of the mazes during the summer of 1999</A>.<P>
+
+<A HREF="index.html">Back to my home page</A>.</B>
+
+</TABLE><BR><BR>
+</BODY>
+</HTML>
+

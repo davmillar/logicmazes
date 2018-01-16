@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><HTML>
+<HEAD><TITLE>Changing-Rule Number Maze</TITLE>
+<SCRIPT LANGUAGE=JAVASCRIPT>
+
+var size = 8
+var diagonally = 0
+var turnOff = 1
+var redRow = 0
+var redCol = 0
+var winDisplay = 0
+var colorPtr = 0
+
+// board is a two-dimensional array that has the number in each square.
+// colors is a two-dimensional array that has the color in each square.
+// Each array is accessed by [row number][column number].
+
+var board = new Array(size)
+var colors = new Array(size) 
+
+// initNumbs: This has the numbers for board. (Ignore that first zero.)
+var initNumbs = new Array(0,
+4,2,2,4,4,3,4,3,
+3,5,3,4,2,3,5,2,
+4,3,2,5,2,2,5,2,
+7,1,4,4,4,2,2,3,
+3,2,2,4,2,5,2,5,
+2,3,2,4,4,2,5,1,
+6,2,2,3,2,5,6,3,
+1,2,5,4,4,2,1,9)
+
+// initColors: This has the colors for colors array.
+var initColors = new Array("x",
+"b","g","y","g","b","y","b","y",
+"g","b","g","b","g","b","g","y",
+"b","g","b","y","b","g","b","g",
+"g","b","g","b","g","b","g","b",
+"y","g","b","g","b","g","b","g",
+"g","y","g","b","g","b","g","y",
+"b","g","b","y","b","g","b","g",
+"g","y","g","b","g","b","y","b")
+
+function loadBoard() {
+n = 1
+for (rowz = 0; rowz < size; rowz++) {
+board[rowz] = new Array(size)
+colors[rowz] = new Array(size)
+   for (colz = 0; colz < size; colz++) {
+   board[rowz][colz] = initNumbs[n]
+   colors[rowz][colz] = initColors[n]
+   n++
+   }
+}
+return}
+
+loadBoard()
+
+
+/* s:  This is the mainline of the program.  When you click on a number, the 
+event handler calls this routine, and it passes the coordinates for the square 
+in the board array. */
+
+function s(rowx,colx) {
+if (winDisplay > 0) {reset3();return}
+
+rowDif = Math.abs(redRow - rowx)
+colDif = Math.abs(redCol - colx)
+
+if (rowDif + colDif == 0) {alert("No, no! Don't click on the RED square.    \rClick on the square you're moving TO.");return}
+
+if (diagonally == 0) {distance = colDif+rowDif
+   if (rowDif > 0 && colDif > 0) {bigX(rowx,colx);alert1();norm(rowx,colx);return}
+}
+else {distance = colDif
+   if (rowDif != colDif) {bigX(rowx,colx);alert2();norm(rowx,colx);return}
+}
+if (distance != board[redRow][redCol]) {bigX(rowx,colx);alert3();norm(rowx,colx);return}
+
+norm(redRow,redCol)
+red(rowx,colx)
+redRow=rowx
+redCol=colx
+if (board[rowx][colx] == 9) {win();return}
+
+if (colors[rowx][colx] != "y") {return}
+
+diagonally = (diagonally + 1) % 2
+document.solvedit.src="z/"+gifTbl[diagonally]+".gif"
+return}
+
+var gifTbl = new Array("horiz","diag")
+
+
+
+// norm:  This sets a square to display its original gif
+function norm(rown,coln) {
+colNum = colors[rown][coln]+board[rown][coln]
+
+if (winDisplay == 1) {rown=getRandom();coln+getRandom()}
+
+document.images[rown*size+coln].src="z/"+colNum+".gif"
+
+return}
+
+// red:  This sets a square to display a red number
+function red(rowr,colr) {
+color = "r";if (colors[rowr][colr] == "y") {color = "c"}
+document.images[rowr*size+colr].src="z/"+color+ board[rowr][colr]+".gif"
+return}
+
+// bigX:  This sets a square to display a big X
+function bigX(rowb,colb) {
+document.images[rowb*size+colb].src="z/x.gif"
+return}
+
+function alert1() {alert("You can't go to that square.\rIt is not on the same horizontal row or the    \rsame vertical column as the red square.")}
+
+function alert2() {alert("You can't go to that square.    \rIt is not on a diagonal line\rwith the red square.")}
+
+function alert3() {toMove = board[redRow][redCol]+" squares"
+if (board[redRow][redCol] == 1) toMove = "1 square"
+
+if (diagonally == 0) {alert("You can't go to that square.\rIt is not "+toMove+" horizontally or    \rvertically from the red square.");return}
+
+alert("You can't go to that square.\rIt is not "+toMove+" diagonally \rfrom the red square.");return}
+
+
+function win() {
+winDisplay = 1;turnOff = 0
+document.solvedit.src="z/solved.gif"
+colorPtr=0
+setTimeout("changeSq()",500)
+setTimeout("changeColor()",4000);return}
+
+function changeSq() {if (turnOff == 1) {return}
+r = getRandom();c = getRandom()
+q = Math.random()
+if (q < .24) {bigX(r,c);setTimer();return}
+if (q > .70) {red(r,c);setTimer();return}
+norm(r,c)
+setTimer()
+return}
+
+function setTimer() {setTimeout("changeSq()",54);return}
+
+function getRandom() {w = Math.random()*size;y = Math.floor(w);return y}
+
+function changeColor() {if (turnOff == 1) {return}
+colorPtr++;if (colorTable[colorPtr] == "END") {colorPtr = 0}
+nextColor = colorTable[colorPtr]
+document.bgColor=nextColor
+
+window.status=nextColor
+setTimeout("changeColor()",6000)
+return}
+
+var colorTable = new Array("F0F8FF","FFFF00","FF00FF","00FFFF","0000FF",
+"00FF7F","6495ED","DC143C","006400","8B008B","E0FFFF","FF8C00",
+"6A5ACD","8B0000","90EE90","AFEEEE","483D8B","7FFFA0",
+"F4A460","00CED1","FFFFFF","8A2BE2","FF1493","1E90FF",
+"228B22","FF00FF","DCDCDC","FFD700","FF7F50","DAA520",
+"9400D3","808080","008000","ADFF2F","FF69B4","7FFFD4","CD5C5C",
+"4B0082","FFFFF0","00BFFF","E6E6FA","8FBC8F","000000","FFF0F5",
+"7CFC00","008B8B","FFFACD","ADD8E6","556B2F","D3D3D3","000080",
+"20B2AA","B0C4DE","FF00FF","00FF00","00008B","32CD32",
+"FF00FF","800000","66CDAA","0000CD","BA55D3","FFFFFF","3CB371",
+"7B68EE","808000","00FA9A","48D1CC","C71585","191970","6B8E23",
+"FFA500","FF4500","DA70D6","98FB98","DB7093","CD853F","FFC0CB",
+"FFFFFF","DDA0DD","B0E0E6","800080","87CEFA","FF0000","4169E1",
+"8B4513","FFFFFF","FA8072","2E8B57","A0522D","9370DB","87CEEB",
+"9400D3","FFFAFA","4682B4","D8BFD8","FF6347","40E0D0",
+"EE82EE","F5F5F5","FFFF00","9ACD32","END")
+
+function rules() {alert("CHANGING-RULE NUMBER MAZE:\r\rWhen the maze begins, you are on the square at the upper left.\r(Your current position is always shown in red.)  What you have to\rdo is make a series of moves that will take you to the square marked    \r\"Goal.\"  Each square has a number that indicates how far you must\rmove when you leave the square.\r\rWhen the maze begins, the following rule is in effect:\r\r      DIRECTIONAL RULE No. 1:  You can move horizontally \r      or vertically but not diagonally.\r\rIf you land on a yellow square, that rule is replaced by this rule:\r\r      DIRECTIONAL RULE No. 2:  You can move diagonally\r      but not horizontally or vertically.\r\rThe next time you land on a yellow square, Directional Rule No. 1\rgoes back into effect, and each time you land on a yellow square,\rthe rule changes.\r\rWhen you decide what square you want to move to, click on that\rsquare.")}
+
+function reset3() {
+reset()
+alert("The maze will be reset to the beginning")
+return}
+
+function reset() {
+turnOff = 1
+winDisplay = 0
+diagonally = 0
+redRow=0;redCol=0
+setTimeout("reset2()",60)
+return}
+
+function reset2() {
+for (rowu = 0; rowu < size; rowu++) {
+   for (colu = 0; colu < size; colu++) {norm(rowu,colu)}
+}
+document.solvedit.src="z/horiz.gif"
+
+document.bgColor="#FFFFF4"
+
+
+red(0,0)
+return}
+
+</SCRIPT>
+
+</HEAD><BODY BGCOLOR=#FFFFF4 LINK=#000000 ALINK=#000000 VLINK=#000000>
+
+<NOSCRIPT><H2><FONT FACE=arial COLOR=#F00000>
+This maze won't work, because you need to have JavaScript enabled.<P>
+
+If you're using Internet Explorer, it can be tricky trying to figure out how to enable JavaScript. Here's a hint: IE doesn't even call it "JavaScript." Instead, they call it "active content" or "Active Scripting" or "Scripting."</H2>
+</NOSCRIPT>
+
+<CENTER></FONT><FONT FACE=arial COLOR=#2000FF>
+<H1>Changing-Rule Number Maze &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</H1><P><BR>
+
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+
+<TR><TD><A HREF=javascript:s(0,0)><IMG SRC="z/r4.gif" NAME="r0c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,1)><IMG SRC="z/g2.gif" NAME="r0c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,2)><IMG SRC="z/y2.gif" NAME="r0c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,3)><IMG SRC="z/g4.gif" NAME="r0c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,4)><IMG SRC="z/b4.gif" NAME="r0c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,5)><IMG SRC="z/y3.gif" NAME="r0c5" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,6)><IMG SRC="z/b4.gif" NAME="r0c6" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(0,7)><IMG SRC="z/y3.gif" NAME="r0c7" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD></TR>
+
+<TR><TD><A HREF=javascript:s(1,0)><IMG SRC="z/g3.gif" NAME="r1c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,1)><IMG SRC="z/b5.gif" NAME="r1c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,2)><IMG SRC="z/g3.gif" NAME="r1c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,3)><IMG SRC="z/b4.gif" NAME="r1c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,4)><IMG SRC="z/g2.gif" NAME="r1c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,5)><IMG SRC="z/b3.gif" NAME="r1c5" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,6)><IMG SRC="z/g5.gif" NAME="r1c6" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(1,7)><IMG SRC="z/y2.gif" NAME="r1c7" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+
+<TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+<TD><A HREF="javascript:rules()"></FONT><FONT FACE=arial COLOR=BLUE SIZE=2>Click here<BR>for the rules</A></TD></TR>
+
+<TR><TD><A HREF=javascript:s(2,0)><IMG SRC="z/b4.gif" NAME="r2c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,1)><IMG SRC="z/g3.gif" NAME="r2c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,2)><IMG SRC="z/b2.gif" NAME="r2c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,3)><IMG SRC="z/y5.gif" NAME="r2c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,4)><IMG SRC="z/b2.gif" NAME="r2c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,5)><IMG SRC="z/g2.gif" NAME="r2c5" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,6)><IMG SRC="z/b5.gif" NAME="r2c6" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(2,7)><IMG SRC="z/g2.gif" NAME="r2c7" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD></TR>
+
+<TR><TD><A HREF=javascript:s(3,0)><IMG SRC="z/g7.gif" NAME="r3c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,1)><IMG SRC="z/b1.gif" NAME="r3c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,2)><IMG SRC="z/g4.gif" NAME="r3c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,3)><IMG SRC="z/b4.gif" NAME="r3c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,4)><IMG SRC="z/g4.gif" NAME="r3c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,5)><IMG SRC="z/b2.gif" NAME="r3c5" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,6)><IMG SRC="z/g2.gif" NAME="r3c6" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(3,7)><IMG SRC="z/b3.gif" NAME="r3c6" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+
+<TD>&nbsp;&nbsp;</TD><TD>
+<A HREF="javascript:reset()"></FONT><FONT FACE=arial COLOR=BLUE SIZE=2>Click here<BR>to restart</A></TD></TR>
+
+<TR><TD><A HREF=javascript:s(4,0)><IMG SRC="z/y3.gif" NAME="r4c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,1)><IMG SRC="z/g2.gif" NAME="r4c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,2)><IMG SRC="z/b2.gif" NAME="r4c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,3)><IMG SRC="z/g4.gif" NAME="r4c3" WIDTH=40 HEIGHT=40 HSPACE=1  VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,4)><IMG SRC="z/b2.gif" NAME="r4c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,5)><IMG SRC="z/g5.gif" NAME="r4c5" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,6)><IMG SRC="z/b2.gif" NAME="r4c6" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(4,7)><IMG SRC="z/g5.gif" NAME="r4c7" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD></TR>
+
+
+<TR><TD><A HREF=javascript:s(5,0)><IMG SRC="z/g2.gif" NAME="r5c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(5,1)><IMG SRC="z/y3.gif" NAME="r5c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(5,2)><IMG SRC="z/g2.gif" NAME="r5c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(5,3)><IMG SRC="z/b4.gif" NAME="r5c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(5,4)><IMG SRC="z/g4.gif" NAME="r5c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(5,5)><IMG SRC="z/b2.gif" NAME="r5c5" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(5,6)><IMG SRC="z/g5.gif" NAME="r5c6" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(5,7)><IMG SRC="z/y1.gif" NAME="r5c6" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD></TR>
+
+<TR><TD><A HREF=javascript:s(6,0)><IMG SRC="z/b6.gif" NAME="r6c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(6,1)><IMG SRC="z/g2.gif" NAME="r6c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(6,2)><IMG SRC="z/b2.gif" NAME="r6c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(6,3)><IMG SRC="z/y3.gif" NAME="r6c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(6,4)><IMG SRC="z/b2.gif" NAME="r6c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(6,5)><IMG SRC="z/g5.gif" NAME="r6c5" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(6,6)><IMG SRC="z/b6.gif" NAME="r6c6" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(6,7)><IMG SRC="z/g3.gif" NAME="r6c6" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD></TR>
+
+
+<TR><TD><A HREF=javascript:s(7,0)><IMG SRC="z/g1.gif" NAME="r7c0" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(7,1)><IMG SRC="z/y2.gif" NAME="r7c1" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(7,2)><IMG SRC="z/g5.gif" NAME="r7c2" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(7,3)><IMG SRC="z/b4.gif" NAME="r7c3" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(7,4)><IMG SRC="z/g4.gif" NAME="r7c4" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(7,5)><IMG SRC="z/b2.gif" NAME="r7c5" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(7,6)><IMG SRC="z/y1.gif" NAME="r7c6" WIDTH=40 HEIGHT=40 HSPACE=2 VSPACE=1></A></TD>
+<TD><A HREF=javascript:s(7,7)><IMG SRC="z/b9.gif" NAME="r7c7" WIDTH=40 HEIGHT=40 HSPACE=1 VSPACE=1></A></TD>
+
+<TD>&nbsp;</TD><TD></FONT><IMG SRC="z/horiz.gif" WIDTH=90 HEIGHT=40 HSPACE=0 VSPACE=1 NAME="solvedit"></TD></TR>
+
+</TABLE><BR CLEAR=ALL><P><BR><BR>
+<TABLE BORDER=0 WIDTH=73% CELLPADDING=0 CELLSPACING=0><tr><td>
+
+<A HREF="n1mz.html"></FONT><FONT FACE="Arial" SIZE=3 COLOR=blue>To the 6x6 Number Maze</A></FONT>.<P>
+<A HREF="n2mz.html"></FONT><FONT FACE="Arial" SIZE=3 COLOR=blue>To the 7x7 Number Maze</A></FONT>.<P>
+<A HREF="n4mz.html"></FONT><FONT FACE="Arial" SIZE=3 COLOR=blue>To the No-U-Turn Number Maze</A></FONT>.<P>
+<A HREF="index.html"></FONT><FONT FACE="Arial" SIZE=3 COLOR=blue>Back to the home page</A></FONT>.<P><HR><P>
+
+</FONT><FONT FACE="Times New Roman" SIZE=4 COLOR=BLACK>
+<B>Further notes:</B> I think this is the best of my number mazes. It first appeared in <A HREF="mad.html"></FONT><FONT FACE="Times New Roman" SIZE=4 COLOR=BLUE><I><B>Mad Mazes</I></B></A></FONT><FONT FACE="Times New Roman" SIZE=4 COLOR=BLACK>, published in 1990. I hadn&#146;t looked at the maze since 1990 and I&#146;d completely forgotten the solution. After I wrote this program, I tried solving the maze and discovered it was pretty hard. And it was a lot of fun. I think the solution follows a rather amusing route.<P>
+
+If you&#146;ve been visiting <A HREF="http://www.mathpuzzle.com/"></FONT><FONT FACE="Times New Roman" SIZE=4 COLOR=BLUE><B>www.mathpuzzle.com</B></A></FONT><FONT FACE="Times New Roman" SIZE=4 COLOR=BLACK>, you may have noticed that Ed Pegg refers to my puzzles as &#147;multi-<WBR>state mazes.&#148; The 6x6 Number Maze and the 7x7 Number Maze didn&#146;t quite fit that description because when you are on a particular square in one of those mazes you can only be in one state. But the Changing-<WBR>Rule Number Maze is truly multi-<WBR>state. When you&#146;re on a particular square here you can be in one of two states, depending on which rule is currently in effect. The next maze in the series, the &#147;No-U-Turn Number Maze,&#148; is also multi-<WBR>state. When you&#146;re on a particular square in that maze you can be in one of four different states depending on the direction you entered the square. By the way, although the the 6x6 and the 7x7 maze use rules that go back at least as far as Sam Loyd, the Changing-<WBR>Rule and the No-U-<WBR>Turn mazes use rules that are original inventions of mine.<P>
+
+
+
+
+</TABLE><BR>
+
+<script language="JavaScript">
+// This is here just to pre-load some GIFs.
+dummy1 = new Image(40,40);dummy1.src="z/x.gif"
+dummy2 = new Image(40,40);dummy2.src="z/r1.gif"
+dummy3 = new Image(40,40);dummy3.src="z/r2.gif"
+dummy4 = new Image(40,40);dummy4.src="z/r3.gif"
+dummy5 = new Image(40,40);dummy5.src="z/r5.gif"
+dummy6 = new Image(40,40);dummy6.src="z/r6.gif"
+dummy7 = new Image(40,40);dummy7.src="z/r7.gif"
+dummy8 = new Image(40,40);dummy8.src="z/r9.gif"
+dummy9 = new Image();dummy9.src="z/solved.gif"
+dummy0 = new Image();dummy0.src="z/diag.gif"
+dummya = new Image(40,40);dummya.src="z/c1.gif"
+dummyb = new Image(40,40);dummyb.src="z/c2.gif"
+dummyc = new Image(40,40);dummyc.src="z/c3.gif"
+dummyd = new Image(40,40);dummyd.src="z/c5.gif"
+</script>
+</BODY>
+</HTML>
+

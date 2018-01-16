@@ -1,0 +1,1069 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><HTML>
+<HEAD><TITLE>Eyeball Mazes</TITLE>
+
+<META NAME="keywords" CONTENTS="Eyeball mazes, mazes, logic mazes, mazes-with-rules, puzzles, Robert Abbott">
+
+<style type="text/css">
+h5 {font: bold 32px "Arial", "Helvetica", sans-serif; color:#2000FF; margin: 15 0 0 0;}
+
+h6 {font: 13px "Arial", "Helvetica", sans-serif; color: blue; margin: 0 0 0 0; }
+
+span {font: bold 19px "Arial", "Helvetica", sans-serif; color: #fa0000;}
+p {font: 18px "Verdana", sans-serif; margin-top: 0; color:black}
+p.small {font: 14px "Arial", sans-serif; color:white }
+p.link {font: 18px "Arial", sans-serif;  }
+
+.lev0 {width:57; height:57; border-style:none; padding:0; margin:0; z-index:0}
+
+.r1c1u {position:absolute; left:1px; top:47px; width:57; height:57; z-index:1; }
+.r1c2u {position:absolute; left:58px; top:47px; width:57; height:57; z-index:1; }
+.r1c3u {position:absolute; left:115px; top:47px; width:57; height:57; z-index:1; }
+.r1c4u {position:absolute; left:172px; top:47px; width:57; height:57; z-index:1; }
+.r1c5u {position:absolute; left:229px; top:47px; width:57; height:57; z-index:1; }
+.r1c6u {position:absolute; left:286px; top:47px; width:57; height:57; z-index:1; }
+.r1c7u {position:absolute; left:343px; top:47px; width:57; height:57; z-index:1; }
+.r1c8u {position:absolute; left:400px; top:47px; width:57; height:57; z-index:1; }
+.r1c9u {position:absolute; left:457px; top:47px; width:57; height:57; z-index:1; }
+
+.r2c1u {position:absolute; left:1px; top:104px; width:57; height:57; z-index:1; }
+.r2c2u {position:absolute; left:58px; top:104px; width:57; height:57; z-index:1; }
+.r2c3u {position:absolute; left:115px; top:104px; width:57; height:57; z-index:1; }
+.r2c4u {position:absolute; left:172px; top:104px; width:57; height:57; z-index:1; }
+.r2c5u {position:absolute; left:229px; top:104px; width:57; height:57; z-index:1; }
+.r2c6u {position:absolute; left:286px; top:104px; width:57; height:57; z-index:1; }
+.r2c7u {position:absolute; left:343px; top:104px; width:57; height:57; z-index:1; }
+.r2c8u {position:absolute; left:400px; top:104px; width:57; height:57; z-index:1; }
+.r2c9u {position:absolute; left:457px; top:104px; width:57; height:57; z-index:1; }
+
+.r3c1u {position:absolute; left:1px; top:161px; width:57; height:57; z-index:1; }
+.r3c2u {position:absolute; left:58px; top:161px; width:57; height:57; z-index:1; }
+.r3c3u {position:absolute; left:115px; top:161px; width:57; height:57; z-index:1; }
+.r3c4u {position:absolute; left:172px; top:161px; width:57; height:57; z-index:1; }
+.r3c5u {position:absolute; left:229px; top:161px; width:57; height:57; z-index:1; }
+.r3c6u {position:absolute; left:286px; top:161px; width:57; height:57; z-index:1; }
+.r3c7u {position:absolute; left:343px; top:161px; width:57; height:57; z-index:1; }
+.r3c8u {position:absolute; left:400px; top:161px; width:57; height:57; z-index:1; }
+.r3c9u {position:absolute; left:457px; top:161px; width:57; height:57; z-index:1; }
+
+.r4c1u {position:absolute; left:1px; top:218px; width:57; height:57; z-index:1; }
+.r4c2u {position:absolute; left:58px; top:218px; width:57; height:57; z-index:1; }
+.r4c3u {position:absolute; left:115px; top:218px; width:57; height:57; z-index:1; }
+.r4c4u {position:absolute; left:172px; top:218px; width:57; height:57; z-index:1; }
+.r4c5u {position:absolute; left:229px; top:218px; width:57; height:57; z-index:1; }
+.r4c6u {position:absolute; left:286px; top:218px; width:57; height:57; z-index:1; }
+.r4c7u {position:absolute; left:343px; top:218px; width:57; height:57; z-index:1; }
+.r4c8u {position:absolute; left:400px; top:218px; width:57; height:57; z-index:1; }
+.r4c9u {position:absolute; left:457px; top:218px; width:57; height:57; z-index:1; }
+
+.r5c1u {position:absolute; left:1px; top:275px; width:57; height:57; z-index:1; }
+.r5c2u {position:absolute; left:58px; top:275px; width:57; height:57; z-index:1; }
+.r5c3u {position:absolute; left:115px; top:275px; width:57; height:57; z-index:1; }
+.r5c4u {position:absolute; left:172px; top:275px; width:57; height:57; z-index:1; }
+.r5c5u {position:absolute; left:229px; top:275px; width:57; height:57; z-index:1; }
+.r5c6u {position:absolute; left:286px; top:275px; width:57; height:57; z-index:1; }
+.r5c7u {position:absolute; left:343px; top:275px; width:57; height:57; z-index:1; }
+.r5c8u {position:absolute; left:400px; top:275px; width:57; height:57; z-index:1; }
+.r5c9u {position:absolute; left:457px; top:275px; width:57; height:57; z-index:1; }
+
+.r6c1u {position:absolute; left:1px; top:332px; width:57; height:57; z-index:1; }
+.r6c2u {position:absolute; left:58px; top:332px; width:57; height:57; z-index:1; }
+.r6c3u {position:absolute; left:115px; top:332px; width:57; height:57; z-index:1; }
+.r6c4u {position:absolute; left:172px; top:332px; width:57; height:57; z-index:1; }
+.r6c5u {position:absolute; left:229px; top:332px; width:57; height:57; z-index:1; }
+.r6c6u {position:absolute; left:286px; top:332px; width:57; height:57; z-index:1; }
+.r6c7u {position:absolute; left:343px; top:332px; width:57; height:57; z-index:1; }
+.r6c8u {position:absolute; left:400px; top:332px; width:57; height:57; z-index:1; }
+.r6c9u {position:absolute; left:457px; top:332px; width:57; height:57; z-index:1; }
+
+.r7c1u {position:absolute; left:1px; top:389px; width:57; height:57; z-index:1; }
+.r7c2u {position:absolute; left:58px; top:389px; width:57; height:57; z-index:1; }
+.r7c3u {position:absolute; left:115px; top:389px; width:57; height:57; z-index:1; }
+.r7c4u {position:absolute; left:172px; top:389px; width:57; height:57; z-index:1; }
+.r7c5u {position:absolute; left:229px; top:389px; width:57; height:57; z-index:1; }
+.r7c6u {position:absolute; left:286px; top:389px; width:57; height:57; z-index:1; }
+.r7c7u {position:absolute; left:343px; top:389px; width:57; height:57; z-index:1; }
+.r7c8u {position:absolute; left:400px; top:389px; width:57; height:57; z-index:1; }
+.r7c9u {position:absolute; left:457px; top:389px; width:57; height:57; z-index:1; }
+
+.r8c1u {position:absolute; left:1px; top:446px; width:57; height:57; z-index:1; }
+.r8c2u {position:absolute; left:58px; top:446px; width:57; height:57; z-index:1; }
+.r8c3u {position:absolute; left:115px; top:446px; width:57; height:57; z-index:1; }
+.r8c4u {position:absolute; left:172px; top:446px; width:57; height:57; z-index:1; }
+.r8c5u {position:absolute; left:229px; top:446px; width:57; height:57; z-index:1; }
+.r8c6u {position:absolute; left:286px; top:446px; width:57; height:57; z-index:1; }
+.r8c7u {position:absolute; left:343px; top:446px; width:57; height:57; z-index:1; }
+.r8c8u {position:absolute; left:400px; top:446px; width:57; height:57; z-index:1; }
+.r8c9u {position:absolute; left:457px; top:446px; width:57; height:57; z-index:1; }
+
+
+#maze {position:absolute; left:0px; top:60px;border:0px solid red; margin-left:13% }
+#rules {position:absolute; left:80px; top:620px;  width:800}
+
+</style>
+
+<SCRIPT LANGUAGE=JAVASCRIPT>
+/* Copyright 2003 by Robert Abbott -- www.logicmazes.com */
+
+var currentMaze = maze1
+var initSw = 0 // 0 = initial start-up, 1 = load in progress, 2 = normal
+var bgChanged = 0 // BG changed for winning display
+var bgAltered = 0 // BG changed for intermediate goal
+
+var curRow = 6 // row currently containing circle
+var curCol = 5 // column currently containing circle
+var curOrient = "u" // where eyeballs currently point
+var gwd = 844
+var sol1 = 0  // if 1, we are currently showing a solution a maze
+var board = new Array(11)
+
+/* board: This is an array that is 11 wide and 10 high. It has information for the current maze. The display for the maze is also 11 wide and 10 high, but the playable area is only 9 wide and 8 high.
+
+Each entry in the board is 2 characters.
+
+If the first character is 1 thru 5, then this is a playable square, and the number means:
+
+1--diamond
+2--cross
+3--star
+4--flower
+5--reserved for expansion
+
+If a playable square, then the second character gives the color:
+
+A--blue
+B--red
+C--yellow
+D--green
+E--reserved for expansion
+
+If the first character is 6, then this is a special square that consists of a single black line. The second character is 1 if the line is horizontal or 2 if the line is vertical.
+
+If the first character is 7, then this is a special square that is empty. The second character is a hex number that indicates which borders are present around the square. */
+
+/* s: This is the mainline of the program. When you click on a square, it links to this routine, and it passes the coordinates for the square in the board array. */
+
+// Global variables used by s function:
+
+var curRow = 5
+
+var curCol = 4
+var curSq = 0 // contents of cur square
+var row = 0  // row clicked on
+var col = 0  // column clicked on
+var sq = 0   // contents of square clicked on
+var curOrient = "u"
+var newOrient = "u"
+
+rowDif = 0
+abRowDif = 0
+colDif = 0
+abColDif = 0
+curSq = 0
+
+function s(rowx,colx,paramx3) { 
+
+
+if ((initSw < 2) && (paramx3 !="a")) return
+
+row = rowx
+col = colx
+rowDif = row - curRow
+abRowDif = Math.abs(rowDif)
+colDif = col - curCol
+abColDif = Math.abs(colDif)
+sq = board[row][col]
+curSq = board[curRow][curCol]
+
+if (bgChanged) restoreBG()
+
+if (abRowDif + abColDif == 0) {alert("No, no! Don't click on the square with the circle. \rClick on the square you're moving TO.");return}
+
+if (sq > "5e") {error("You can't land on a blank square.");return} 
+
+if (abRowDif * abColDif != 0) {
+error("You can't go to that square. \r\rIt is not on the same row or the same \rcolumn as the current square.");return}
+
+if (abColDif > 0) {if (testRow()) return}
+if (abRowDif > 0) {if (testCol()) return}
+
+if ((sq.substring(0,1) != curSq.substring(0,1)) && (sq.substring(1) != curSq.substring(1))) {error("You can't go there. \r\rThe square you move to must have either \rthe same SYMBOL or the same COLOR \ras the square you are now on.");return}
+
+// Move is okay
+
+initSw = 1 // ignore other input while update takes place
+
+document.images["r"+curRow+"c"+curCol+"u"].src="w/eyes"+newOrient+".gif"
+
+
+wait = 400; if (document.forms[0].sound.checked) {wait = 1400
+ document.applets[0].play(1,'door.au')}
+setTimeout("moveDone()",wait)
+gwe = curRow * curCol + gw
+return}
+
+function moveDone() {
+
+// if the square we are leaving is a Goal, change to a blank
+if (testGoal(curRow,curCol)) {
+board[curRow][curCol] = "7f"
+setSq(curRow,curCol,"x")}
+
+document.images["r"+curRow+"c"+curCol+"u"].src="w/70x.gif"
+
+
+curRow = row
+curCol = col
+curOrient = newOrient
+document.images["r"+curRow+"c"+curCol+"u"].src="w/eyes"+newOrient+".gif"
+
+
+if (!testGoal(curRow,curCol)) {initSw = 2-sol1; saveMove(99); return}
+
+// A Goal was reached
+
+goalNumb--
+
+document.images["todo"].src="w/todo"+goalNumb+".gif"
+
+saveMove(99)
+
+if (goalNumb == 0) {setTimeout("change1()",800); return} // final goal reached
+
+// there are more goals to reach
+
+bgCount = currentMaze[8] - goalNumb 
+document.bgColor = bgArray[bgCount]
+bgAltered = 1
+initSw = 2;return}
+
+var bgArray = new Array("#FFFFF2","#F0F8FF","#FFFAFA","#E0E0E0","#FFFFFF","#80FF7F")
+//  Original AliceBlue Snow  Grayish White  SpringGreenish
+
+function change1() {
+if (document.forms[0].sound.checked) document.applets[0].play(1,'win.au')
+document.bgColor = currentMaze[7]
+bgChanged = 1
+setTimeout("change2()",2000)
+return}
+
+function change2() {
+
+if (mazeNumb == 12) alert("I don't know if you noticed this, but the solution to Maze 12 follows \ra certain pattern. It resembles the route through a single-path labyrinth.") 
+
+alert("CONGRATULATIONS !! \r\rYou solved the maze !! \r\r(Code = "+gwe+")")
+
+initSw = 2;return}
+
+// * * * * * * * * * SUBROUTINES * * * * * * * * * * * * * * * * * * * * *
+
+function error(msg) {
+
+overlay1 = "w/bigx.gif"
+overlay2 = "w/70x.gif"
+
+if (testGoal(row,col)){
+overlay1 = "w/xgoal.gif"
+overlay2 = "w/goal.gif"}
+
+document.images["r"+row+"c"+col+"u"].src=overlay1
+errmsg = msg
+setTimeout("error2()",1000)
+initSw = 1
+return}
+
+function error2() {
+alert(errmsg)
+document.images["r"+row+"c"+col+"u"].src=overlay2
+initSw = 2
+return}
+
+
+
+ 
+
+
+/* setSq:
+
+Note, 11/1/07: A lot of this is now out of date, but I just left it
+
+If param3 = "x" this sets a square to display its usual gif.
+If param3 = "u" it displays a circle pointing up
+If param3 = "d" it displays a circle pointing down
+If param3 = "l" it displays a circle pointing left
+If param3 = "r" it displays a circle pointing right
+If param3 = "b" it displays the big x.
+*/
+
+function setSq(rown,coln,param3) {
+var num = board[rown][coln]
+gifName = "w/"+num+param3+".gif"
+if (param3 == "b") gifName = "w/70x.gif"
+locName = "r"+rown+"c"+coln
+document.images[locName].src=gifName
+return}
+
+function testCol(){ 
+if (rowDif > 0) {incr = 1;newOrient = "d"
+ if (curOrient == "u") {error(faceMsg);return(1)}}
+if (rowDif < 0) {incr = -1;newOrient = "u"
+ if (curOrient == "d") {error(faceMsg);return(1)}}
+for (var rr = curRow + incr; rr != row; rr+=incr) {
+if (board[rr][curCol] > "5f") {error(blankMsg);return(1)}}
+return(0)}
+
+function testRow() {
+if (colDif > 0) {incr = 1;newOrient = "r"
+ if (curOrient == "l") {error(faceMsg);return(1)}}
+if (colDif < 0) {incr = -1;newOrient = "l"
+ if (curOrient == "r") {error(faceMsg);return(1)}}
+for (var cc = curCol + incr; cc != col; cc = cc + incr) {
+if (board[curRow][cc] > "5f") {error(blankMsg);return(1)}}
+return(0)}
+
+function restoreBG() {document.bgColor="#FFFFF2"
+bgChanged=0; bgAltered=0; return}
+
+faceMsg = "You can't go there because you can't travel backwards. \r\rThe circle with the eyeballs shows where you are and \rwhat direction you're facing. You can move FORWARD, \ror TO THE RIGHT, or TO THE LEFT, but you can't \rmove BACKWARDS."
+
+blankMsg = "You can't travel over a blank square."
+
+function testGoal(rowj,colj) {
+for (gi = 119; currentMaze[gi] != 99; gi+=2)
+{if ((rowj == currentMaze[gi]) && (colj == currentMaze[gi+1])) return(1)}
+return(0)}
+
+
+
+
+// * * * * * * * * * START OF PROGRAM * * * * * * * * * * * * * * * * * *
+
+/* Here is where the program starts. It's triggered when the purple lighting bolt gif loads. This sends control to purpleLoaded(). */
+
+function purpleLoaded() {
+
+initBoard() // initialize a blank board
+initList() // initialize a blank moveList
+
+setTimeout("startMaze(maze1,'a')",2500)
+
+return}
+
+function initBoard() {
+for (rowi = 0; rowi < 10; rowi++) {
+ board[rowi] = new Array(11)
+ for (coli = 0; coli < 11; coli++) {
+ board[rowi][coli] = 70
+ }
+}
+return}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+// START MAZE--this starts a particular maze:
+
+function startMaze(mazeLoc,param2) {if ((initSw < 2) && (param2 != "a")) return
+if (initSw == 2) initSw = 1
+
+// If not initial load, display "loading" sign
+if (initSw > 0) document.images["loading"].src="w/loading.gif"
+
+// Clear the upper level:
+
+for (toplevR = 1; toplevR < 9; toplevR++) { 
+for (toplevC = 1; toplevC < 10; toplevC++) {
+topName = "r"+toplevR+"c"+toplevC+"u"
+document.images[topName].src="w/70x.gif"}}
+
+loadBoard(mazeLoc)
+
+mazeNumb = mazeLoc[0]
+currentMaze = mazeLoc
+curRow = mazeLoc[1]
+curCol = mazeLoc[2]
+curOrient = mazeLoc[3]
+goalNumb = mazeLoc[8]
+
+saveMove(98) // save starting position in moveList
+
+if ((bgChanged) || (bgAltered)) restoreBG()
+
+dispGifs()
+
+initSw = 1
+setTimeout("finalize2()",1000)
+gw = mazeNumb + curRow + curCol + mazeLoc[4] + mazeLoc[5] + mazeLoc[6]
+return}
+
+function finalize2() {
+playSound('door.au')
+document.images["loading"].src="w/70x.gif" // Turn off "loading" sign
+return}
+
+
+function playSound(soundFile) { 
+var param = 2; if (document.forms[0].sound.checked) param = 1
+if (sol1) param = 2
+initSw = document.applets[0].play(param,soundFile) - gwd
+if (initSw != 0 && initSw != 1) initSw = 2 // fix 8/20/02
+if (sol1) initSw=1
+return}
+
+function loadBoard(initNumbs) {
+var n = 9
+for (rowz = 0; rowz < 10; rowz++) {
+ for (colz = 0; colz < 11; colz++) {
+ board[rowz][colz] = initNumbs[n]
+ n++
+ }
+}
+return}
+
+
+function dispGifs() {
+digit1st = mazeNumb; digit2nd = "w/70x.gif"
+
+if (mazeNumb > 9) {digit1st = 1
+units = mazeNumb - 10
+digit2nd = "w/maze"+units+".gif"}
+
+document.images["mazenumber"].src="w/maze"+digit1st+".gif"
+document.images["mazenumb2"].src=digit2nd
+
+
+for (rowu = 0; rowu < 10; rowu++) {
+for (colu = 0; colu < 11; colu++) {
+setSq(rowu,colu,"x")
+
+if (testGoal(rowu,colu)) {
+document.images["r"+rowu+"c"+colu+"u"].src="w/goal.gif"}
+if ((rowu == curRow) && (colu == curCol)) {
+document.images["r"+rowu+"c"+colu+"u"].src="w/eyes"+curOrient+".gif"}
+
+}}
+
+
+document.images["todo"].src="w/todo"+goalNumb+".gif"
+
+solsign = "w/70x.gif";
+if (mazeNumb < 3) solsign = "w/solu.gif"
+document.images["sol"].src=solsign
+
+return}
+
+
+// * * * * * * * * * GO BACK FUNCTION * * * * * * * * * * * * * * * * * *
+
+var moveList = new Array(5)
+
+var max = 40  // moveList is large enough for this many items
+var listPtr = 0 // pointer to moveList
+var original = 0 
+
+function initList() {
+for (rowi = 0; rowi < max; rowi++) {
+ moveList[rowi] = new Array(5)
+  for (coli = 0; coli < 5; coli++) {
+  moveList[rowi][coli] = 2
+  }
+ }
+return}
+
+function saveMove(flag) {
+if (flag == 98) {listPtr = 0}
+if (flag == 99) {if (moveList[listPtr][0] != 98) {moveList[listPtr][0] = 1}
+ listPtr++; if (listPtr == max) {listPtr = 0}}
+moveList[listPtr][0] = flag
+
+moveList[listPtr][1] = curRow
+moveList[listPtr][2] = curCol
+moveList[listPtr][3] = curOrient
+moveList[listPtr][4] = goalNumb
+return}
+
+
+function goBack() {if (initSw < 2) return
+
+if (moveList[listPtr][0] == 98) {alert("You can't go back.\rYou're at the beginning."); return}
+
+backupPtr = listPtr-1; if (backupPtr < 0) backupPtr = max-1
+
+if (moveList[backupPtr][0] == 99) {alert("Sorry, the program can't go back any further because it forgot all your previous moves."); return}
+
+param2 = "w/70x.gif"; if (testGoal(curRow,curCol)) param2 = "w/goal.gif"
+
+// --old-- setSq(curRow,curCol,param2) // change sq we're leaving 
+document.images["r"+curRow+"c"+curCol+"u"].src=param2
+
+
+listPtr = backupPtr
+
+curRow = moveList[listPtr][1]
+curCol = moveList[listPtr][2]
+curOrient = moveList[listPtr][3]
+goalNumb = moveList[listPtr][4]
+
+// if this was a goal, then a blank, change it back
+
+if (testGoal(curRow,curCol)) {
+
+  original = 9 + (curRow * 11) + curCol
+  board[curRow][curCol] = currentMaze[original] 
+  setSq(curRow,curCol,"x")}
+
+document.images["r"+curRow+"c"+curCol+"u"].src="w/eyes"+curOrient+".gif"
+
+if (param2 == "x") return
+
+// this is square leading to goal
+
+document.images["todo"].src="w/todo"+goalNumb+".gif" // change todo sign
+
+bgCount = currentMaze[8] - goalNumb
+document.bgColor = bgArray[bgCount] // restore older BG color 
+bgAltered = 1
+return}
+
+// * * * * * * * * * SOLVE1 FUNCTION * * * * * * * * * * * * * * * * * *
+
+function solve1() {
+
+if (initSw < 2) return
+if (mazeNumb == 1) show1()
+if (mazeNumb == 2) show2()
+return}
+
+function show2() {
+sol1 = 1
+startMaze(maze2,'u')
+setTimeout("m1()",4000);return}
+
+function m1() {s(5,5,'a');setTimeout("m2()",3000);return}
+function m2() {s(3,5,'a');setTimeout("m3()",3000);return}
+function m3() {s(3,6,'a');setTimeout("m4()",3000);return}
+function m4() {s(4,6,'a');setTimeout("m5()",3000);return}
+function m5() {s(4,4,'a');setTimeout("m6()",3000);return}
+function m6() {s(3,4,'a');setTimeout("m7()",3000);return}
+function m7() {s(3,7,'a');setTimeout("m8()",3000);return}
+function m8() {s(4,7,'a');setTimeout("m9()",3000);return}
+function m9() {s(4,6,'a');setTimeout("m10()",3000);return}
+function m10() {sol1=0;s(1,6,'a');return}
+
+
+function show1() {
+sol1 = 1
+startMaze(maze1,'u')
+setTimeout("mm1()",4000);return}
+
+function mm1() {s(4,5,'a');setTimeout("mm2()",3000);return}
+function mm2() {s(4,7,'a');setTimeout("mm3()",3000);return}
+function mm3() {s(2,7,'a');setTimeout("mm4()",3000);return}
+function mm4() {s(2,4,'a');setTimeout("mm5()",3000);return}
+function mm5() {s(5,4,'a');setTimeout("mm6()",3000);return}
+function mm6() {s(5,6,'a');setTimeout("mm7()",3000);return}
+function mm7() {sol1=0;s(1,6,'a');return}
+
+
+
+
+// * * * * * * * * * ALL LAYOUTS * * * * * * * * * * * * * * * * * *
+
+
+/* Here is the information particular to each maze. It is:
+
+0: The maze number
+1: The row number of the start square
+2: The column number of the start square
+3: The orientation of the circle at the start--u, d, l, r.
+4: Not used
+5: Not used
+6: A number used in generating the completion code
+7: The hex number of the BG color to show when maze is solved
+8: The number of goals
+
+9 thru 118: The array of 110 numbers that are moved to board
+
+119: The row number of the first goal
+120: The column number of the first goal
+121: Additional pairs for additional goals, or 99 meaning end */
+
+// yellow (modified)
+var maze1 = new Array(1,6,5,"u",1,1,25,"#FFFF10",1,
+"70","70","70","70","70","70","74","70","70","70","70",
+"70","70","70","70","74","76","4b","7c","70","70","70",
+"70","70","70","72","2a","4c","1c","2d","78","70","70",
+"70","70","70","72","4d","3b","3d","1c","78","70","70",
+"70","70","70","72","4b","4a","3b","4d","78","70","70",
+"70","70","70","72","3a","1b","4a","1a","78","70","70",
+"70","70","70","70","73","1a","79","71","70","70","70",
+"70","70","70","70","70","71","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+1,6,99)
+
+// chartruse
+var maze2 = new Array(2,6,5,"u",1,1,25,"#7FFF00",1,
+"70","70","70","70","70","70","74","70","70","70","70",
+"70","70","70","70","74","76","4b","7c","70","70","70",
+"70","70","70","72","2a","4a","1a","2d","78","70","70",
+"70","70","70","72","4d","3b","3d","4c","78","70","70",
+"70","70","70","72","4b","1d","3b","3c","78","70","70",
+"70","70","70","72","2d","1b","4a","1d","78","70","70",
+"70","70","70","70","73","1a","79","71","70","70","70",
+"70","70","70","70","70","71","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+1,6,99)
+
+// aqua
+var maze3 = new Array(3,6,4,"u",1,1,50,"#00FFFF",1,
+"70","70","70","70","70","70","74","70","70","70","70",
+"70","70","70","74","74","76","2b","7c","70","70","70",
+"70","70","72","2b","1d","2a","3d","4a","78","70","70",
+"70","70","72","4d","1b","1d","3c","3a","78","70","70",
+"70","70","72","1d","1c","2d","3b","2c","78","70","70",
+"70","70","72","4b","2c","4a","2d","3c","78","70","70",
+"70","70","70","73","1a","79","71","71","70","70","70",
+"70","70","70","70","71","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+1,6,99)
+
+//lime
+var maze4 = new Array(4,7,4,"u",1,1,75,"#00FF00",1,
+"70","70","70","70","70","70","74","70","70","70","70",
+"70","70","70","74","74","76","2d","7c","70","70","70",
+"70","70","72","1b","4d","4b","3a","1a","78","70","70",
+"70","70","72","3b","4a","3d","2a","1d","78","70","70",
+"70","70","70","75","77","3a","7d","75","70","70","70",
+"70","70","72","2d","3c","4d","3d","2b","78","70","70",
+"70","70","72","2b","3d","2a","1d","2d","78","70","70",
+"70","70","70","73","1c","79","71","71","70","70","70",
+"70","70","70","70","71","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+1,6,99)
+
+// sort of a light magenta
+var maze5 = new Array(5,6,5,"u",1,1,25,"#FF80FF",1,
+"70","70","70","70","70","70","74","70","70","70","70",
+"70","70","70","70","74","76","3b","7c","70","70","70",
+"70","70","70","72","1b","4b","4c","2c","78","70","70",
+"70","70","70","72","4d","1c","1a","3d","78","70","70",
+"70","70","70","72","3d","1d","3a","1d","78","70","70",
+"70","70","70","72","1c","1b","2c","2a","78","70","70",
+"70","70","70","70","73","3c","79","71","70","70","70",
+"70","70","70","70","70","71","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+1,6,99)
+
+// SORT OF A LIGHT BLUE
+var maze6 = new Array(6,6,5,"u",1,1,25,"#ADE8FF",1,
+"70","70","70","70","70","70","74","70","70","70","70",
+"70","70","70","70","74","76","3c","7c","70","70","70",
+"70","70","70","72","1b","2a","2b","1d","78","70","70",
+"70","70","70","72","4a","4b","1c","2a","78","70","70",
+"70","70","70","72","3a","4a","2d","4d","78","70","70",
+"70","70","70","72","4b","2d","1d","2b","78","70","70",
+"70","70","70","70","73","4a","79","71","70","70","70",
+"70","70","70","70","70","71","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+1,6,99)
+
+// RED ORANGE ALTERED
+var maze7 = new Array(7,6,5,"u",1,1,75,"#FF8C00",2,
+"70","70","70","74","74","74","74","74","70","70","70",
+"70","70","72","1a","1b","2a","3a","2c","78","70","70",
+"70","70","72","2c","3b","3c","4a","4c","78","70","70",
+"70","70","72","2b","7d","75","77","4d","78","70","70",
+"70","70","72","1b","3b","2d","1c","2b","78","70","70",
+"70","70","72","4c","1b","4d","1a","2c","78","70","70",
+"70","70","70","71","73","4a","79","71","70","70","70",
+"70","70","70","70","70","71","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+1,4,1,6,99)
+
+// PINK ALTERED
+var maze8 = new Array(8,6,4,"u",1,1,50,"#FF69F4",1,
+"70","70","70","70","70","74","70","70","70","70","70",
+"70","70","70","74","76","2d","7c","74","74","70","70",
+"70","70","72","2b","3b","1c","1a","1b","3c","78","70",
+"70","70","72","3c","1c","3b","2d","3d","4d","78","70",
+"70","70","72","4b","2b","3d","4a","1c","2c","78","70",
+"70","70","72","3d","1b","2c","1c","4d","4a","78","70",
+"70","70","70","73","4c","79","71","71","71","70","70",
+"70","70","70","70","71","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+1,5,99)
+
+// ORCHID MODIFIED
+var maze9 = new Array(9,6,3,"u",1,1,120,"#F970E7",3,
+"70","70","70","74","74","74","74","74","70","70","70",
+"70","70","72","4a","3c","4d","3a","4c","78","70","70",
+"70","70","72","1b","2c","2b","2a","1d","78","70","70",
+"70","70","72","3b","7f","3b","7f","3d","78","70","70",
+"70","70","72","1c","4d","3d","3b","1a","78","70","70",
+"70","70","72","3c","4b","2a","1b","2c","78","70","70",
+"70","70","72","2b","79","71","71","71","70","70","70",
+"70","70","70","71","70","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+"70","70","70","70","70","70","70","70","70","70","70",
+3,3,3,5,3,7,99)
+
+// LawnGreen
+var maze10 = new Array(10,8,4,"u",1,1,175,"#7CFF00",5,
+"70","70","70","74","74","74","74","74","74","70","70",
+"70","70","72","1b","3c","4a","2b","4b","2a","78","70",
+"70","70","72","1c","4a","3c","3a","2a","3c","78","70",
+"70","70","72","4b","3a","1a","4d","2b","1c","78","70",
+"70","70","70","75","75","77","1b","7d","75","74","70",
+"70","70","72","2a","1b","4d","3d","2c","1b","3d","62",
+"70","70","72","2c","3a","1c","4c","4b","3d","2a","62",
+"70","70","72","2b","1d","4a","1c","2b","1c","3a","62",
+"70","70","70","73","3c","79","71","71","71","71","70",
+"70","70","70","70","61","70","70","70","70","70","70",
+2,5,2,7,4,6,6,5,6,7,99)
+
+// Plum
+var maze11 = new Array(11,8,4,"u",1,1,127,"#dda0dd",1,
+"70","70","70","74","74","74","70","74","74","74","70",
+"70","70","72","3d","4b","2d","7a","3c","4c","3a","62",
+"70","70","72","2b","3c","1c","7a","1d","3a","4c","62",
+"70","70","72","4b","1b","3a","7e","4a","2a","1c","62",
+"70","70","72","1d","2b","4c","3a","4b","1c","3d","62",
+"70","70","72","4a","2a","1b","7b","2b","4d","2c","62",
+"70","70","72","1b","4c","3c","7a","1b","2b","4a","62",
+"70","70","72","2d","4b","2a","7a","3d","2c","3b","62",
+"70","70","70","73","1d","79","70","73","3d","79","70",
+"70","70","70","70","61","70","70","70","61","70","70",
+8,8,99)
+
+
+// MY OWN TANGLEWOOD SKY BLUE
+var maze12 = new Array(12,8,6,"u",1,1,207,"#C4FAFE",3,
+"70","70","70","74","74","74","74","74","74","74","70",
+"70","70","72","3c","4a","1d","3b","3d","5e","2b","62",
+"70","70","72","1d","2b","4a","5e","3c","2b","3d","62",
+"70","70","72","5e","3c","1a","2a","1a","3d","4c","62",
+"70","70","72","3b","1d","4c","1a","5e","1d","2c","62",
+"70","70","72","3d","2c","1b","4c","1a","3c","5e","62",
+"70","70","72","1a","4b","5e","2b","3c","2a","1d","62",
+"70","70","72","2c","5e","3d","1d","3b","4d","2a","62",
+"70","70","70","71","71","73","3d","79","71","79","70",
+"70","70","70","70","70","70","61","70","70","70","70",
+4,3,4,9,7,6,99)
+
+
+// yellow again
+var maze13 = new Array(13,8,4,"u",1,1,137,"#FFFF20",6,
+"70","70","70","74","74","74","74","74","74","74","70",
+"70","70","72","4a","1b","5e","2c","5e","3d","4a","62",
+"70","70","72","3d","4c","3c","2b","2a","4b","1d","62",
+"70","70","72","2c","3b","2d","3d","1d","5e","3a","62",
+"70","70","72","3d","4c","3b","1a","1c","5e","2a","62",
+"70","70","72","2c","3b","4d","5e","4c","3a","1d","62",
+"70","70","72","1b","4d","3c","1a","3a","4c","2b","62",
+"70","70","72","4b","1a","2d","1c","2b","1d","4a","62",
+"70","70","70","73","2a","79","71","71","71","71","70",
+"70","70","70","70","61","70","70","70","70","70","70",
+1,3,3,5,3,7,4,3,5,5,6,8,99)
+
+
+
+</SCRIPT>
+
+</HEAD><BODY BGCOLOR=#FFFFF2 LINK=BLUE ALINK=BLUE VLINK=BLUE>
+
+<NOSCRIPT>
+<H1><FONT FACE=arial COLOR=RED>
+This maze won't work, because you don't have JavaScript enabled.</H1>
+</NOSCRIPT>
+
+<CENTER>
+
+
+<h5>Eyeball Maze <IMG SRC="w/maze1.gif" ALIGN=BOTTOM NAME="mazenumber" HSPACE=0 VSPACE=0 BORDER=0 WIDTH=16 HEIGHT=25><IMG SRC="w/70x.gif" ALIGN=BOTTOM NAME="mazenumb2" HSPACE=0 VSPACE=0 BORDER=0 WIDTH=16 HEIGHT=25"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+<div id="maze">
+
+
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+
+<TR><TD><IMG SRC="w/70x.gif" NAME="r0c0" WIDTH=1 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r0c1" WIDTH=57 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r0c2" WIDTH=57 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r0c3" WIDTH=57 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r0c4" WIDTH=57 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r0c5" WIDTH=57 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r0c6" WIDTH=57 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r0c7" WIDTH=57 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r0c8" WIDTH=57 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r0c9" WIDTH=57 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/70x.gif" NAME="r0c10" WIDTH=36 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
+
+<TD ROWSPAN=9 VALIGN=TOP WIDTH=175><IMG SRC="w/loading.gif" NAME="loading" WIDTH=125 HEIGHT=41 HSPACE=0 VSPACE=0 BORDER=0><br>
+
+<IMG SRC="w/todo1.gif" NAME="todo" WIDTH=125 HEIGHT=47 HSPACE=0 VSPACE=12 BORDER=0><br><br>
+
+
+
+<h6><A HREF="javascript:startMaze(currentMaze,'u')">Restart the current&nbsp;maze</A><BR><BR>
+
+Start Maze &nbsp;<A HREF="javascript:startMaze(maze1,'u')">1</A> &nbsp; <A HREF="javascript:startMaze(maze2,'u')">2</A> &nbsp; <A HREF="javascript:startMaze(maze3,'u')">3</A> &nbsp; <A HREF="javascript:startMaze(maze4,'u')">4</A> &nbsp; <A HREF="javascript:startMaze(maze5,'u')">5</A><BR>
+
+<IMG SRC="padding.gif" WIDTH=2 HEIGHT=15 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=BOTTOM><A HREF="javascript:startMaze(maze6,'u')">6</A> &nbsp; <A HREF="javascript:startMaze(maze7,'u')">7</A> &nbsp; <A HREF="javascript:startMaze(maze8,'u')">8</A> &nbsp; <A HREF="javascript:startMaze(maze9,'u')">9</A> &nbsp; <A HREF="javascript:startMaze(maze10,'u')">10</A> &nbsp; <A HREF="javascript:startMaze(maze11,'u')">11</A> &nbsp; <A HREF="javascript:startMaze(maze12,'u')">12</A> &nbsp; <A HREF="javascript:startMaze(maze13,'u')">13</A> <br><br>
+<a HREF="javascript:goBack()">Go back one move</a><br><br>
+
+<FORM><INPUT NAME="sound" TYPE=CHECKBOX CHECKED>Sound</FORM></h6>
+
+<A HREF=javascript:solve1()><IMG SRC="w/solu.gif" NAME="sol" WIDTH=125 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0><br><br>
+</TD></TR>
+
+<TR><TD><IMG SRC="w/62x.gif" NAME="r1c0" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/1ax.gif" NAME="r1c1" class=lev0></TD>
+<TD><IMG SRC="w/1bx.gif" NAME="r1c2" class=lev0></TD>
+<TD><IMG SRC="w/1cx.gif" NAME="r1c3" class=lev0></TD>
+<TD><IMG SRC="w/1dx.gif" NAME="r1c4" class=lev0></TD>
+<TD><IMG SRC="w/2ax.gif" NAME="r1c5" class=lev0></TD>
+<TD><IMG SRC="w/2bx.gif" NAME="r1c6" CLASS=lev0></TD>
+<TD><IMG SRC="w/2cx.gif" NAME="r1c7" CLASS=lev0></TD>
+<TD><IMG SRC="w/2dx.gif" NAME="r1c8" class=lev0></TD>
+
+<TD><IMG SRC="w/2ax.gif" NAME="r1c9" class=lev0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r1c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR>
+
+<TR><TD><IMG SRC="w/62x.gif" NAME="r2c0" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/3ax.gif" NAME="r2c1" class=lev0></TD>
+<TD><IMG SRC="w/3bx.gif" NAME="r2c2" class=lev0></TD>
+<TD><IMG SRC="w/3cx.gif" NAME="r2c3" class=lev0></TD>
+<TD><IMG SRC="w/3dx.gif" NAME="r2c4" class=lev0></TD>
+<TD><IMG SRC="w/4ax.gif" NAME="r2c5" class=lev0></TD>
+<TD><IMG SRC="w/4bx.gif" NAME="r2c6" class=lev0></TD>
+<TD><IMG SRC="w/4cx.gif" NAME="r2c7" class=lev0></TD>
+<TD><IMG SRC="w/4dx.gif" NAME="r2c8" class=lev0></TD>
+<TD><IMG SRC="w/4ax.gif" NAME="r2c9" class=lev0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r2c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR>
+
+<TR><TD><IMG SRC="w/62x.gif" NAME="r3c0" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/1ax.gif" NAME="r3c1" class=lev0></TD>
+<TD><IMG SRC="w/7fx.gif" NAME="r3c2" class=lev0></TD>
+<TD><IMG SRC="w/7fx.gif" NAME="r3c3" class=lev0></TD>
+<TD><IMG SRC="w/7fx.gif" NAME="r3c4" class=lev0></TD>
+<TD><IMG SRC="w/7fx.gif" NAME="r3c5" class=lev0></TD>
+<TD><IMG SRC="w/7fx.gif" NAME="r3c6" class=lev0></TD>
+<TD><IMG SRC="w/7fx.gif" NAME="r3c7" class=lev0></TD>
+<TD><IMG SRC="w/7fx.gif" NAME="r3c8" class=lev0></TD>
+<TD><IMG SRC="w/3ax.gif" NAME="r3c9" class=lev0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r3c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR>
+
+<TR><TD><IMG SRC="w/70x.gif" NAME="r4c0" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/71x.gif" NAME="r4c1" class=lev0></TD>
+<TD><IMG SRC="w/71x.gif" NAME="r4c2" class=lev0></TD>
+<TD><IMG SRC="w/71x.gif" NAME="r4c3" class=lev0></TD>
+<TD><IMG SRC="w/71x.gif" NAME="r4c4" class=lev0></TD>
+<TD><IMG SRC="w/71x.gif" NAME="r4c5" class=lev0></TD>
+<TD><IMG SRC="w/71x.gif" NAME="r4c6" class=lev0></TD>
+<TD><IMG SRC="w/71x.gif" NAME="r4c7" class=lev0></TD>
+<TD><IMG SRC="w/71x.gif" NAME="r4c8" class=lev0></TD>
+<TD><IMG SRC="w/71x.gif" NAME="r4c9" class=lev0></TD>
+<TD><IMG SRC="w/70x.gif" NAME="r4c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR> 
+
+<TR><TD><IMG SRC="w/70x.gif" NAME="r5c0" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/72x.gif" NAME="r5c1" class=lev0></TD>
+<TD><IMG SRC="w/73x.gif" NAME="r5c2" class=lev0></TD>
+<TD><IMG SRC="w/75x.gif" NAME="r5c3" class=lev0></TD>
+<TD><IMG SRC="w/76x.gif" NAME="r5c4" class=lev0></TD>
+<TD><IMG SRC="w/77x.gif" NAME="r5c5" class=lev0></TD>
+<TD><IMG SRC="w/78x.gif" NAME="r5c6" class=lev0></TD>
+<TD><IMG SRC="w/79x.gif" NAME="r5c7" class=lev0></TD>
+<TD><IMG SRC="w/7cx.gif" NAME="r5c8" class=lev0></TD>
+<TD><IMG SRC="w/7dx.gif" NAME="r5c9" class=lev0></TD>
+<TD><IMG SRC="w/70x.gif" NAME="r5c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR>
+
+<TR><TD><IMG SRC="w/70x.gif" NAME="r6c0" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r6c1" class=lev0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r6c2" class=lev0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r6c3" class=lev0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r6c4" class=lev0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r6c5" class=lev0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r6c6" class=lev0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r6c7" class=lev0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r6c8" class=lev0></TD>
+<TD><IMG SRC="w/74x.gif" NAME="r6c9" class=lev0></TD>
+<TD><IMG SRC="w/70x.gif" NAME="r6c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR>
+
+<TR><TD><IMG SRC="w/70x.gif" NAME="r7c0" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/todo1.gif" NAME="r7c1" class=lev0></TD>
+<TD><IMG SRC="w/todo2.gif" NAME="r7c2" class=lev0></TD>
+<TD><IMG SRC="w/todo3.gif" NAME="r7c3" class=lev0></TD>
+<TD><IMG SRC="w/todo4.gif" NAME="r7c4" class=lev0></TD>
+<TD><IMG SRC="w/todo5.gif" NAME="r7c5" class=lev0></TD>
+<TD><IMG SRC="w/todo6.gif" NAME="r7c6" class=lev0></TD>
+<TD><IMG SRC="w/todo0.gif" NAME="r7c7" class=lev0></TD>
+<TD><IMG SRC="w/1bx.gif" NAME="r7c8" class=lev0></TD>
+<TD><IMG SRC="w/2bx.gif" NAME="r7c9" class=lev0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r7c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR>
+
+<TR><TD><IMG SRC="w/62x.gif" NAME="r8c0" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/3bx.gif" NAME="r8c1" class=lev0></TD>
+<TD><IMG SRC="w/4bx.gif" NAME="r8c2" class=lev0></TD>
+<TD><IMG SRC="w/1cx.gif" NAME="r8c3" class=lev0></TD>
+<TD><IMG SRC="w/2cx.gif" NAME="r8c4" class=lev0></TD>
+<TD><IMG SRC="w/3cx.gif" NAME="r8c5" class=lev0></TD>
+<TD><IMG SRC="w/4cx.gif" NAME="r8c6" class=lev0></TD>
+<TD><IMG SRC="w/2dx.gif" NAME="r8c7" class=lev0></TD>
+<TD><IMG SRC="w/3dx.gif" NAME="r8c8" class=lev0></TD>
+<TD><IMG SRC="w/maze0.gif" NAME="r8c9" class=lev0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r8c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR>
+
+<TR><TD><IMG SRC="w/70x.gif" NAME="r9c0" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r9c1" WIDTH=57 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r9c2" WIDTH=57 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r9c3" WIDTH=57 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r9c4" WIDTH=57 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r9c5" WIDTH=57 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r9c6" WIDTH=57 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r9c7" WIDTH=57 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r9c8" WIDTH=57 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0></TD>
+<TD><IMG SRC="w/62x.gif" NAME="r9c9" WIDTH=57 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD>
+<TD><IMG SRC="w/70x.gif" NAME="r9c10" WIDTH=1 HEIGHT=1 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR>
+
+</TABLE><BR CLEAR=ALL>
+
+<A HREF=javascript:s(1,1)><IMG SRC="w/70x.gif" NAME="r1c1u" class=r1c1u border=0></A>
+<A HREF=javascript:s(1,2)><IMG SRC="w/70x.gif" NAME="r1c2u" class=r1c2u border=0></A>
+<A HREF=javascript:s(1,3)><IMG SRC="w/70x.gif" NAME="r1c3u" class=r1c3u border=0></A>
+<A HREF=javascript:s(1,4)><IMG SRC="w/70x.gif" NAME="r1c4u" class=r1c4u border=0></A>
+<A HREF=javascript:s(1,5)><IMG SRC="w/70x.gif" NAME="r1c5u" class=r1c5u border=0></A>
+<A HREF=javascript:s(1,6)><IMG SRC="w/70x.gif" NAME="r1c6u" class=r1c6u border=0></A>
+<A HREF=javascript:s(1,7)><IMG SRC="w/70x.gif" NAME="r1c7u" class=r1c7u border=0></A>
+<A HREF=javascript:s(1,8)><IMG SRC="w/70x.gif" NAME="r1c8u" class=r1c8u border=0></A>
+<A HREF=javascript:s(1,9)><IMG SRC="w/70x.gif" NAME="r1c9u" class=r1c9u border=0></A>
+
+<A HREF=javascript:s(2,1)><IMG SRC="w/70x.gif" NAME="r2c1u" class=r2c1u border=0></A>
+<A HREF=javascript:s(2,2)><IMG SRC="w/70x.gif" NAME="r2c2u" class=r2c2u border=0></A>
+<A HREF=javascript:s(2,3)><IMG SRC="w/70x.gif" NAME="r2c3u" class=r2c3u border=0></A>
+<A HREF=javascript:s(2,4)><IMG SRC="w/70x.gif" NAME="r2c4u" class=r2c4u border=0></A>
+<A HREF=javascript:s(2,5)><IMG SRC="w/70x.gif" NAME="r2c5u" class=r2c5u border=0></A>
+<A HREF=javascript:s(2,6)><IMG SRC="w/70x.gif" NAME="r2c6u" class=r2c6u border=0></A>
+<A HREF=javascript:s(2,7)><IMG SRC="w/70x.gif" NAME="r2c7u" class=r2c7u border=0></A>
+<A HREF=javascript:s(2,8)><IMG SRC="w/70x.gif" NAME="r2c8u" class=r2c8u border=0></A>
+<A HREF=javascript:s(2,9)><IMG SRC="w/70x.gif" NAME="r2c9u" class=r2c9u border=0></A>
+
+<A HREF=javascript:s(3,1)><IMG SRC="w/70x.gif" NAME="r3c1u" class=r3c1u border=0></A>
+<A HREF=javascript:s(3,2)><IMG SRC="w/eyesu.gif" NAME="r3c2u" class=r3c2u border=0></A>
+<A HREF=javascript:s(3,3)><IMG SRC="w/eyesr.gif" NAME="r3c3u" class=r3c3u border=0></A>
+<A HREF=javascript:s(3,4)><IMG SRC="w/eyesd.gif" NAME="r3c4u" class=r3c4u border=0></A>
+<A HREF=javascript:s(3,5)><IMG SRC="w/eyesl.gif" NAME="r3c5u" class=r3c5u border=0></A>
+<A HREF=javascript:s(3,6)><IMG SRC="w/goal.gif" NAME="r3c6u" class=r3c6u border=0></A>
+<A HREF=javascript:s(3,7)><IMG SRC="w/bigx.gif" NAME="r3c7u" class=r3c7u border=0></A>
+<A HREF=javascript:s(3,8)><IMG SRC="w/xgoal.gif" NAME="r3c8u" class=r3c8u border=0></A>
+<A HREF=javascript:s(3,9)><IMG SRC="w/70x.gif" NAME="r3c9u" class=r3c9u border=0></A>
+
+<A HREF=javascript:s(4,1)><IMG SRC="w/70x.gif" NAME="r4c1u" class=r4c1u border=0></A>
+<A HREF=javascript:s(4,2)><IMG SRC="w/70x.gif" NAME="r4c2u" class=r4c2u border=0></A>
+<A HREF=javascript:s(4,3)><IMG SRC="w/70x.gif" NAME="r4c3u" class=r4c3u border=0></A>
+<A HREF=javascript:s(4,4)><IMG SRC="w/70x.gif" NAME="r4c4u" class=r4c4u border=0></A>
+<A HREF=javascript:s(4,5)><IMG SRC="w/70x.gif" NAME="r4c5u" class=r4c5u border=0></A>
+<A HREF=javascript:s(4,6)><IMG SRC="w/70x.gif" NAME="r4c6u" class=r4c6u border=0></A>
+<A HREF=javascript:s(4,7)><IMG SRC="w/70x.gif" NAME="r4c7u" class=r4c7u border=0></A>
+<A HREF=javascript:s(4,8)><IMG SRC="w/70x.gif" NAME="r4c8u" class=r4c8u border=0></A>
+<A HREF=javascript:s(4,9)><IMG SRC="w/70x.gif" NAME="r4c9u" class=r4c9u border=0></A>
+
+<A HREF=javascript:s(5,1)><IMG SRC="w/maze2.gif" NAME="r5c1u" class=r5c1u border=0></A>
+<A HREF=javascript:s(5,2)><IMG SRC="w/maze3.gif" NAME="r5c2u" class=r5c2u border=0></A>
+<A HREF=javascript:s(5,3)><IMG SRC="w/maze5.gif" NAME="r5c3u" class=r5c3u border=0></A>
+<A HREF=javascript:s(5,4)><IMG SRC="w/maze6.gif" NAME="r5c4u" class=r5c4u border=0></A>
+<A HREF=javascript:s(5,5)><IMG SRC="w/maze7.gif" NAME="r5c5u" class=r5c5u border=0></A>
+<A HREF=javascript:s(5,6)><IMG SRC="w/maze8.gif" NAME="r5c6u" class=r5c6u border=0></A>
+<A HREF=javascript:s(5,7)><IMG SRC="w/maze9.gif" NAME="r5c7u" class=r5c7u border=0></A>
+<A HREF=javascript:s(5,8)><IMG SRC="w/maze4.gif" NAME="r5c8u" class=r5c8u border=0></A>
+<A HREF=javascript:s(5,9)><IMG SRC="w/maze1.gif" NAME="r5c9u" class=r5c9u border=0></A>
+
+<A HREF=javascript:s(6,1)><IMG SRC="w/70x.gif" NAME="r6c1u" class=r6c1u border=0></A>
+<A HREF=javascript:s(6,2)><IMG SRC="w/70x.gif" NAME="r6c2u" class=r6c2u border=0></A>
+<A HREF=javascript:s(6,3)><IMG SRC="w/70x.gif" NAME="r6c3u" class=r6c3u border=0></A>
+<A HREF=javascript:s(6,4)><IMG SRC="w/70x.gif" NAME="r6c4u" class=r6c4u border=0></A>
+<A HREF=javascript:s(6,5)><IMG SRC="w/70x.gif" NAME="r6c5u" class=r6c5u border=0></A>
+<A HREF=javascript:s(6,6)><IMG SRC="w/70x.gif" NAME="r6c6u" class=r6c6u border=0></A>
+<A HREF=javascript:s(6,7)><IMG SRC="w/70x.gif" NAME="r6c7u" class=r6c7u border=0></A>
+<A HREF=javascript:s(6,8)><IMG SRC="w/70x.gif" NAME="r6c8u" class=r6c8u border=0></A>
+<A HREF=javascript:s(6,9)><IMG SRC="w/70x.gif" NAME="r6c9u" class=r6c9u border=0></A>
+
+<A HREF=javascript:s(7,1)><IMG SRC="w/70x.gif" NAME="r7c1u" class=r7c1u border=0></A>
+<A HREF=javascript:s(7,2)><IMG SRC="w/70x.gif" NAME="r7c2u" class=r7c2u border=0></A>
+<A HREF=javascript:s(7,3)><IMG SRC="w/70x.gif" NAME="r7c3u" class=r7c3u border=0></A>
+<A HREF=javascript:s(7,4)><IMG SRC="w/70x.gif" NAME="r7c4u" class=r7c4u border=0></A>
+<A HREF=javascript:s(7,5)><IMG SRC="w/70x.gif" NAME="r7c5u" class=r7c5u border=0></A>
+<A HREF=javascript:s(7,6)><IMG SRC="w/70x.gif" NAME="r7c6u" class=r7c6u border=0></A>
+<A HREF=javascript:s(7,7)><IMG SRC="w/70x.gif" NAME="r7c7u" class=r7c7u border=0></A>
+<A HREF=javascript:s(7,8)><IMG SRC="w/70x.gif" NAME="r7c8u" class=r7c8u border=0></A>
+<A HREF=javascript:s(7,9)><IMG SRC="w/70x.gif" NAME="r7c9u" class=r7c9u border=0></A>
+
+<A HREF=javascript:s(8,1)><IMG SRC="w/70x.gif" NAME="r8c1u" class=r8c1u border=0></A>
+<A HREF=javascript:s(8,2)><IMG SRC="w/eyesu.gif" NAME="r8c2u" class=r8c2u border=0></A>
+<A HREF=javascript:s(8,3)><IMG SRC="w/eyesr.gif" NAME="r8c3u" class=r8c3u border=0></A>
+<A HREF=javascript:s(8,4)><IMG SRC="w/eyesd.gif" NAME="r8c4u" class=r8c4u border=0></A>
+<A HREF=javascript:s(8,5)><IMG SRC="w/eyesl.gif" NAME="r8c5u" class=r8c5u border=0></A>
+<A HREF=javascript:s(8,6)><IMG SRC="w/goal.gif" NAME="r8c6u" class=r8c6u border=0></A>
+<A HREF=javascript:s(8,7)><IMG SRC="w/bigx.gif" NAME="r8c7u" class=r8c7u border=0></A>
+<A HREF=javascript:s(8,8)><IMG SRC="w/xgoal.gif" NAME="r8c8u" class=r8c8u border=0></A>
+<A HREF=javascript:s(8,9)><IMG SRC="w/70x.gif" NAME="r8c9u" class=r8c9u border=0></A>
+
+
+</div>
+
+<div id=rules>
+
+<center> 
+
+<TABLE BORDER=0 size=77% CELLPADDING=0 CELLSPACING=0><tr><td>
+
+
+<p><span>Rules: &nbsp;</span>That circle with the two little eyeballs is you. The eyeballs show which direction you&#146;re facing. What you have to do is make a series of moves that will get you onto the square (or squares) marked GOAL. To indicate your move, click on the square you are moving to.</P>
+
+<p>You can move horizontally or vertically for any distance, as long as you do not move over any blank spaces. However, you can only end your move on a square that has either the <I><B>same symbol</B></I> or the <I><B>same color</B></I> as the square your move started on (moving to both the same symbol <I><B>and</B></I> the same color is also okay). You can move straight ahead or to your right or left, but you may not move to a square that is behind you. If you move to the right or left, your eyeballs will then be pointing in a new direction.</P>
+
+<p>Mazes with two or more goals are tricky. You must visit every goal to solve the maze; so after you visit one goal, you will then want to move on to reach another goal. But when you leave the goal you visited, something unusual happens: the square disappears and is replaced with a blank. This complicates things because you&#146;re not allowed to travel over blank squares.</P>
+
+<p>The go-back-one-move function takes you back a move, but you can click on it repeatedly to go back several moves.</P>
+
+<p>Mazes 1 and 2 are simple, beginner mazes. To make them even simpler, you can click on &#147;Show Solution&#148; and the maze will solve itself. Solutions are not provided for any other of the mazes. There is an amusing feature that you might be able to see in Mazes&nbsp;1 and&nbsp;2. These two mazes look similar to each other, but the true path to the goal in Maze&nbsp;2 is similar to a false path in Maze&nbsp;1, and a false path in Maze&nbsp;2 is similar to the true path in Maze&nbsp;1.</P>
+
+<p>The solution to Maze 11 takes a route that traces a curious pattern. It&#146;s a pattern you might be able to recognize. If you solve that maze, a pop-up box will identify the pattern.</P>
+
+<p>Most of these mazes were created by me&#151;and by hand. The exceptions are Mazes&nbsp;5 and&nbsp;6. The layouts for these mazes were created by James Stephen&#146;s &#147;<a HREF="http://www.puzzlebeast.com/">PuzzleBeast</a>&#148; program. This program can create layouts for many different types of mazes. Some of the layouts it creates are very hard to solve, and I never could understand exactly why they are hard.<BR><BR>
+
+<IMG SRC="w/5ex.gif" WIDTH=57 HEIGHT=57 HSPACE=9 VSPACE=4 BORDER=0 ALIGN=LEFT onLoad="purpleLoaded()">
+
+This picture shows something that appears only in Mazes&nbsp;12 and&nbsp;13: purple lightning bolts. They act the same as other symbols and colors, but because there are no other purple symbols, and because there are no non-purple lightning bolts, you can never land on a square with a purple lightning bolt. Unlike a blank, however, you can travel over these squares. In case you&#146;re wondering why I use these symbols, I&#146;ll explain that I couldn&#146;t finish composing the larger layouts unless I could fill in remaining squares with something that acts like these purple lightning bolts.</P>
+
+<p>When you solve one of these mazes, the program outputs a code that looks something like: Code=695. The number doesn&#146;t mean anything, but you might use it to prove to a friend that you solved a particular maze. Or you might set up a contest where people should solve one or more of these mazes, then e-mail you the numbers that follow Code=.</P>
+
+<p>The maze design and the JavaScript program is copyright &#169; 2003 by Robert Abbott. If you are interested in programming this game for a different device (PDA, cell phone, video game controller), please see my <A HREF="terms.html">terms of use</A>.</P>
+
+<p>My thanks to &#147;<a HREF="http://www.joker-games.com/">Joker</A>&#148; for supplying me with a Java applet that plays the sound files (I was having trouble getting JavaScript to play sound on all browsers).</P>
+
+<p>Also, thanks to Bobbie Jo Riddle for discovering what she realized was an unintended short solution&nbsp;to Maze 4. She knew it was a mistake because it was much too easy. I corrected that maze&nbsp;on 2/20/04.</p>
+
+<p><span>Note, July 7, 2008: &nbsp;</span>These mazes are currently being used as a contest by the Catalan Culture Ministry. The contest will last a couple of more months. Their version of the program is <A HREF="http://www.quellegeixes.cat/laberints/laberint">here</A> (note that they added a theme about books). If you are one of the few people who can understand Catalan, you can read about the contest <A HREF="http://www.quellegeixes.cat/laberints">here</A>.</p>  
+
+
+<P><HR></P>
+
+<p class=link><A HREF="index.html">To the home page</A></p>
+
+</div>
+
+
+<applet code="AbbottSP.class" width=1 height=1>
+<H1><FONT FACE=arial COLOR=RED>
+This program won't work because you need to have Java as well as JavaScript enabled.<BR><BR><BR><BR><BR><BR></H1>
+</applet>
+
+</BODY>
+</HTML>
+
+
