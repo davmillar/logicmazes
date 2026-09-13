@@ -27,32 +27,32 @@ var bgChanged = 0
 
 var board = new Array(10)
 
-/* board: This is a two-dimensional array used to control the maze. It is 
+/* board: This is a two-dimensional array used to control the maze. It is
 accessed by [row number][column number].
 
-I planned to describe the squares in each maze layout with binary numbers, where 
-each bit determined if an arrow was present. These binary numbers could be 
-conveniently carried as hexadecimal numbers. Unfortunately, I discovered that as 
-soon as JavaScript does something with a hex number, it converts it to decimal.  
-But I still could do logical ANDs on these decimal numbers to test bits. I also 
-borrowed some functions that let me convert the decimal numbers back to hex, and 
+I planned to describe the squares in each maze layout with binary numbers, where
+each bit determined if an arrow was present. These binary numbers could be
+conveniently carried as hexadecimal numbers. Unfortunately, I discovered that as
+soon as JavaScript does something with a hex number, it converts it to decimal.
+But I still could do logical ANDs on these decimal numbers to test bits. I also
+borrowed some functions that let me convert the decimal numbers back to hex, and
 that would let me use the hex numbers as part of GIF names.
 
-Each square in the board has a three-digit hexadecimal number. The bottom two 
-digits usually indicate what arrows are in the square. An arrow pointing north 
-is represented by the 10 bit, east by 20, south by 40, and west by 80. NE is 01, 
-SE is 02, SW is 04, and NW is 08. These numbers can be added together, so C1 
-would represent three arrows that point west, south, and northeast. 00 is a 
-special case, meaning this is the GOAL. 
+Each square in the board has a three-digit hexadecimal number. The bottom two
+digits usually indicate what arrows are in the square. An arrow pointing north
+is represented by the 10 bit, east by 20, south by 40, and west by 80. NE is 01,
+SE is 02, SW is 04, and NW is 08. These numbers can be added together, so C1
+would represent three arrows that point west, south, and northeast. 00 is a
+special case, meaning this is the GOAL.
 
-The left-most digit is an identifier. If the 8 bit is on, the square is green, 
-if 4 is on the square is blue. If the 2 bit is on, then this square has one or 
-more red arrows, meaning 1 should be added to d. If the 1 bit is on, then this 
-square has one or more yellow arrows, meaning 1 should be subtracted from d. If 
-both the 2 and 1 bit are on, then the this is a special square that is mostly 
-blank. So the left-most digit of these numbers is 3. I assigned these bits in 
-such a way that there will always be at least one bit that is on.  Otherwise the 
-convert-from-decimal-to-hex would lop off the leading zeros in the hex digits, 
+The left-most digit is an identifier. If the 8 bit is on, the square is green,
+if 4 is on the square is blue. If the 2 bit is on, then this square has one or
+more red arrows, meaning 1 should be added to d. If the 1 bit is on, then this
+square has one or more yellow arrows, meaning 1 should be subtracted from d. If
+both the 2 and 1 bit are on, then the this is a special square that is mostly
+blank. So the left-most digit of these numbers is 3. I assigned these bits in
+such a way that there will always be at least one bit that is on.  Otherwise the
+convert-from-decimal-to-hex would lop off the leading zeros in the hex digits,
 and that would confuse my naming plans.
 
 If the left-most digit is 3, then the middle digit indicates what type of special square this is.  If the middle digit's 1 bit is on, then this square (or rectangle in this case) is associated with a GIF that is a black line.  If the right-most digit has the 1 bit on, then this is a horizontal line; if the right-most digit has the 2 bit on, then this is a vertical line.  Therefore the hex number 311 in the board is associated with "si11.gif" ("si" means "special image") a 48x1 GIF that is a horizontal black line and 312 is associated with "si12.gif" a 1x47 GIF that is a vertical black line.
@@ -64,7 +64,7 @@ The inactive and active special squares are associated with mostly transparent G
 Currently, the "active" special squares are white, not transparent. And the sides without black lines have dashed lines.
 
 The first five numbers of each maze definition are not put in the board.
-These numbers represent: the maze number, the row of the start position, 
+These numbers represent: the maze number, the row of the start position,
 the column of the start position, the width of the board, and a fifth position for use in the future. */
 
 
@@ -102,7 +102,7 @@ if (bgChanged) restoreBG()
 if (abRowDif + abColDif == 0) {alert("No, no! Don't click on the RED square.    \rClick on the square you're moving TO.");return}
 
 if ((sq & 0x100) && (sq & 0x200)) {if ((sq & 0x040) == 0) return
-else {error("You can't land on a blank square.");return}} 
+else {error("You can't land on a blank square.");return}}
 
 if ((abRowDif * abColDif != 0) && (abRowDif != abColDif)) {
 error("You can't go to that square.\r\rIt is not on the same row, column,\ror diagonal line as the red square.");return}
@@ -134,7 +134,8 @@ color = currentMaze[4]
 document.bgColor=color
 bgChanged = 1
 
-if (document.forms[0].sound.checked) {document.applets[0].play(1,'harp.au')}
+// Nerf sound effects
+// if (document.forms[0].sound.checked) {document.applets[0].play(1,'harp.au')}
 
 alert("CONGRATULATIONS !!\r\rYou solved the maze !!\r\r(Code = "+gw+")")
 return}
@@ -174,17 +175,19 @@ var playCount = 1
 var waitTime = 300
 
 function playLoop() {
-if (!document.forms[0].sound.checked) return
-document.applets[0].play(1,toPlay)
---playCount; if (playCount < 1) return
-setTimeout("playLoop()",waitTime)
-return}
+    // Nerf sound effects
+    // if (!document.forms[0].sound.checked) return
+    // document.applets[0].play(1,toPlay)
+    // --playCount; if (playCount < 1) return
+    // setTimeout("playLoop()",waitTime)
+    return;
+}
 
 function error(msg) {
 setSq(row,col,"x")
 alert(msg)
 setSq(row,col,"u")
-return} 
+return}
 
 /* setSq:
 
@@ -202,7 +205,7 @@ if (num & 0x400) {color = "b"; if (param3=="r") color = "r"}
 
 var type = "n"
 if (num & 0x200) {type = "a"}
-if (num & 0x100) {type = "d"; if (num & 0x200) {type = "i"}} 
+if (num & 0x100) {type = "d"; if (num & 0x200) {type = "i"}}
 
 hexNum = toHex(num)
 gifName = "x/"+color+type+hexNum.substring(1,3)+".gif"
@@ -276,7 +279,7 @@ error("Okay, okay!   I thought the previous rule was the last one, but now I kno
 initSw = 2
 return}
 
- 
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 // INIT PROGRAM (started after maze number loads):
@@ -305,7 +308,7 @@ mazeNumb = mazeLoc[0]
 currentMaze = mazeLoc
 redRow = mazeLoc[1]
 redCol = mazeLoc[2]
-if (mazeNumb == 11) {msgNumb = 1; m11Count++} 
+if (mazeNumb == 11) {msgNumb = 1; m11Count++}
 
 dispGifs() // if not initial load, display board and other gifs
 
@@ -344,15 +347,21 @@ setTimeout("finalize2()",2000)
 return}
 
 function finalize2() {
-playSound("dink.au")
-document.images["loading"].src="x/si20.gif"  // Turn off "loading" sign
-return}
+    // Use playSound even though sound is disabled because of its side effects on game state
+    playSound("dink.au")
+    document.images["loading"].src="x/si20.gif"  // Turn off "loading" sign
+    return
+}
 
-function playSound(soundFile) { 
-var param = 2; if (document.forms[0].sound.checked) param = 1
-initSw = document.applets[0].play(param,soundFile) - gwd
-if (initSw != 0 && initSw != 1) initSw = 2 // fix 8/20/02
-return}
+function playSound(soundFile) {
+    // Nerf sound effects
+    var param = 2;
+    // if (document.forms[0].sound.checked) param = 1
+    // initSw = document.applets[0].play(param,soundFile) - gwd
+    // if (initSw != 0 && initSw != 1) initSw = 2 // fix 8/20/02
+    initSw = 2;
+    return;
+}
 
 
 
@@ -758,7 +767,7 @@ If you're using Internet Explorer, it can be tricky trying to figure out how to 
 <TD><IMG SRC="x/si20.gif" NAME="r3c9" WIDTH=1 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD>
 
 
-<TD><FONT FACE=arial COLOR=BLUE SIZE=2>Start Maze &nbsp;<A HREF="javascript:startMaze(maze1,'u')">1</A> &nbsp; <A HREF="javascript:startMaze(maze2,'u')">2</A> &nbsp; <A HREF="javascript:startMaze(maze3,'u')">3</A> &nbsp; <A HREF="javascript:startMaze(maze4,'u')">4</A> &nbsp; <A HREF="javascript:startMaze(maze5,'u')">5</A> &nbsp; <A HREF="javascript:startMaze(maze6,'u')">6</A> &nbsp; <A HREF="javascript:startMaze(maze7,'u')">7</A> &nbsp; <A 
+<TD><FONT FACE=arial COLOR=BLUE SIZE=2>Start Maze &nbsp;<A HREF="javascript:startMaze(maze1,'u')">1</A> &nbsp; <A HREF="javascript:startMaze(maze2,'u')">2</A> &nbsp; <A HREF="javascript:startMaze(maze3,'u')">3</A> &nbsp; <A HREF="javascript:startMaze(maze4,'u')">4</A> &nbsp; <A HREF="javascript:startMaze(maze5,'u')">5</A> &nbsp; <A HREF="javascript:startMaze(maze6,'u')">6</A> &nbsp; <A HREF="javascript:startMaze(maze7,'u')">7</A> &nbsp; <A
 HREF="javascript:startMaze(maze8,'u')">8</A> &nbsp; <A HREF="javascript:startMaze(maze9,'u')">9</A> &nbsp; <A HREF="javascript:startMaze(maze10,'u')">10</A><br> <A
 HREF="javascript:startMaze(maze11,'u')">11</A> &nbsp; <A
 HREF="javascript:startMaze(maze12,'u')">12</A> &nbsp; <A HREF="javascript:startMaze(maze13,'u')">13</A> &nbsp; <A
@@ -806,7 +815,7 @@ HREF="javascript:startMaze(maze20,'u')">20</A> &nbsp;</TD></TR>
 <TD><A HREF=javascript:s(6,8)><IMG SRC="x/si20.gif" NAME="r6c8" WIDTH=48 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
 <TD><IMG SRC="x/si20.gif" NAME="r6c9" WIDTH=1 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD>
 
-<TD><FORM><INPUT NAME="sound" TYPE=CHECKBOX CHECKED></FONT><FONT FACE=arial COLOR=BLUE SIZE=2>Sound</FORM></TD></TR>
+<TD><!--FORM><INPUT NAME="sound" TYPE=CHECKBOX CHECKED></FONT><FONT FACE=arial COLOR=BLUE SIZE=2>Sound</FORM--></TD></TR>
 
 <TR><TD><IMG SRC="x/si20.gif" NAME="r7c0" WIDTH=1 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></TD>
 <TD><A HREF=javascript:s(7,1)><IMG SRC="x/si20.gif" NAME="r7c1" WIDTH=48 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0></A></TD>
@@ -857,7 +866,7 @@ HREF="javascript:startMaze(maze20,'u')">20</A> &nbsp;</TD></TR>
 
 <p>When the maze begins, <I><B>d</B></I>&nbsp;equals&nbsp;1. When you land on a square with a red arrow, 1&nbsp;is added to&nbsp;<I><B>d</B></I>. When you land on a square with a yellow arrow, 1&nbsp;is subtracted from&nbsp;<I><B>d</B></I>. Two of these mazes have blank squares, which you may not land on.</P>
 
-<p><span>Notes:</span> 
+<p><span>Notes:</span>
 
 There are twenty different layouts here. The rules are based on a maze called &#147;Alice in Mazeland&#148; in my 1990 book <A HREF="mad.html"><I><B>Mad Mazes</I></B></A>. When I wrote that book it never occurred to me that it would be a good idea to have several mazes with the same rules. The layout for the original &#147;Alice in Mazeland&#148 became Maze&nbsp;16 in this program, and, actually, it&#146;s the least interesting of the twenty mazes.</P>
 
@@ -879,7 +888,7 @@ There are twenty different layouts here. The rules are based on a maze called &#
 
 <p>The maze design and the JavaScript program is copyright &#169;&nbsp;2001 by Robert Abbott. If you are interested in programming this game for a different device (PDA, cell phone, video game controller), please see my <A HREF="terms.html">terms of use</A>.</P>
 
-<p>My thanks to <a HREF="http://www.joker-games.com/">&#147;Joker&#148;</A> for supplying me with a Java applet that plays the sound files (I was having trouble getting JavaScript to play sound on all browsers).</p>
+<p><del>My thanks to <a HREF="http://www.joker-games.com/">&#147;Joker&#148;</A> for supplying me with a Java applet that plays the sound files (I was having trouble getting JavaScript to play sound on all browsers).</del> <ins style="background:yellow;">See maintainer's note below.</ins></p>
 
 <hr>
 <p><br><A HREF="index.html">Back to the home page</A></p>
@@ -896,11 +905,21 @@ There are twenty different layouts here. The rules are based on a maze called &#
 
 </td></tr></table>
 
+</CENTER>
+</FONT>
 
+<div style="background:yellow;margin:1em;padding:1em;">
+    <h3>Maintainer's note - 2026-09-13:</h3>
+    <p>The sound effect functionality has been removed due to lack of browser support.</p>
+    <p>If you spot something broken, please reach out via
+    <a href="https://github.com/davmillar/logicmazes">GitHub issues or make a pull request</a>.</p>
+</div>
+
+<!--
 <applet code="AbbottSP.class" width=1 height=1>
 <H1><FONT FACE=arial COLOR=RED>
 This program won't work because you need to have Java as well as JavaScript enabled.<BR><BR><BR><BR><BR><BR></H1>
-</applet>
+</applet> -->
 
 
 </BODY>

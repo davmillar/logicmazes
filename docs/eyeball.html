@@ -160,7 +160,7 @@ colDif = 0
 abColDif = 0
 curSq = 0
 
-function s(rowx,colx,paramx3) { 
+function s(rowx,colx,paramx3) {
 
 
 if ((initSw < 2) && (paramx3 !="a")) return
@@ -178,7 +178,7 @@ if (bgChanged) restoreBG()
 
 if (abRowDif + abColDif == 0) {alert("No, no! Don't click on the square with the circle. \rClick on the square you're moving TO.");return}
 
-if (sq > "5e") {error("You can't land on a blank square.");return} 
+if (sq > "5e") {error("You can't land on a blank square.");return}
 
 if (abRowDif * abColDif != 0) {
 error("You can't go to that square. \r\rIt is not on the same row or the same \rcolumn as the current square.");return}
@@ -195,8 +195,10 @@ initSw = 1 // ignore other input while update takes place
 document.images["r"+curRow+"c"+curCol+"u"].src="w/eyes"+newOrient+".gif"
 
 
-wait = 400; if (document.forms[0].sound.checked) {wait = 1400
- document.applets[0].play(1,'door.au')}
+wait = 400;
+// Nerf sound effects
+//if (document.forms[0].sound.checked) {wait = 1400
+//  document.applets[0].play(1,'door.au')}
 setTimeout("moveDone()",wait)
 gwe = curRow * curCol + gw
 return}
@@ -231,7 +233,7 @@ if (goalNumb == 0) {setTimeout("change1()",800); return} // final goal reached
 
 // there are more goals to reach
 
-bgCount = currentMaze[8] - goalNumb 
+bgCount = currentMaze[8] - goalNumb
 document.bgColor = bgArray[bgCount]
 bgAltered = 1
 initSw = 2;return}
@@ -240,15 +242,17 @@ var bgArray = new Array("#FFFFF2","#F0F8FF","#FFFAFA","#E0E0E0","#FFFFFF","#80FF
 //  Original AliceBlue Snow  Grayish White  SpringGreenish
 
 function change1() {
-if (document.forms[0].sound.checked) document.applets[0].play(1,'win.au')
-document.bgColor = currentMaze[7]
-bgChanged = 1
-setTimeout("change2()",2000)
-return}
+  // Nerf sound effects
+  // if (document.forms[0].sound.checked) document.applets[0].play(1,'win.au')
+  document.bgColor = currentMaze[7]
+  bgChanged = 1
+  setTimeout("change2()",2000)
+  return
+}
 
 function change2() {
 
-if (mazeNumb == 12) alert("I don't know if you noticed this, but the solution to Maze 12 follows \ra certain pattern. It resembles the route through a single-path labyrinth.") 
+if (mazeNumb == 12) alert("I don't know if you noticed this, but the solution to Maze 12 follows \ra certain pattern. It resembles the route through a single-path labyrinth.")
 
 alert("CONGRATULATIONS !! \r\rYou solved the maze !! \r\r(Code = "+gwe+")")
 
@@ -279,7 +283,7 @@ return}
 
 
 
- 
+
 
 
 /* setSq:
@@ -302,7 +306,7 @@ locName = "r"+rown+"c"+coln
 document.images[locName].src=gifName
 return}
 
-function testCol(){ 
+function testCol(){
 if (rowDif > 0) {incr = 1;newOrient = "d"
  if (curOrient == "u") {error(faceMsg);return(1)}}
 if (rowDif < 0) {incr = -1;newOrient = "u"
@@ -370,7 +374,7 @@ if (initSw > 0) document.images["loading"].src="w/loading.gif"
 
 // Clear the upper level:
 
-for (toplevR = 1; toplevR < 9; toplevR++) { 
+for (toplevR = 1; toplevR < 9; toplevR++) {
 for (toplevC = 1; toplevC < 10; toplevC++) {
 topName = "r"+toplevR+"c"+toplevC+"u"
 document.images[topName].src="w/70x.gif"}}
@@ -396,18 +400,26 @@ gw = mazeNumb + curRow + curCol + mazeLoc[4] + mazeLoc[5] + mazeLoc[6]
 return}
 
 function finalize2() {
-playSound('door.au')
-document.images["loading"].src="w/70x.gif" // Turn off "loading" sign
-return}
+  // Call function due to its side effects with the game state even though sounds do not work anymore.
+  playSound('door.au');
+  document.images["loading"].src="w/70x.gif"; // Turn off "loading" sign
+  return;
+}
 
 
-function playSound(soundFile) { 
-var param = 2; if (document.forms[0].sound.checked) param = 1
-if (sol1) param = 2
-initSw = document.applets[0].play(param,soundFile) - gwd
-if (initSw != 0 && initSw != 1) initSw = 2 // fix 8/20/02
-if (sol1) initSw=1
-return}
+function playSound(soundFile) {
+  // Nerf sound effects
+  var param = 2;
+  // if (document.forms[0].sound.checked) param = 1
+  // if (sol1) param = 2
+
+  // Nerf sound applet interaction and always update state to 2.
+  // initSw = document.applets[0].play(param,soundFile) - gwd
+  // if (initSw != 0 && initSw != 1) initSw = 2 // fix 8/20/02
+  initSw = 2;
+  if (sol1) initSw=1
+  return;
+}
 
 function loadBoard(initNumbs) {
 var n = 9
@@ -458,7 +470,7 @@ var moveList = new Array(5)
 
 var max = 40  // moveList is large enough for this many items
 var listPtr = 0 // pointer to moveList
-var original = 0 
+var original = 0
 
 function initList() {
 for (rowi = 0; rowi < max; rowi++) {
@@ -492,7 +504,7 @@ if (moveList[backupPtr][0] == 99) {alert("Sorry, the program can't go back any f
 
 param2 = "w/70x.gif"; if (testGoal(curRow,curCol)) param2 = "w/goal.gif"
 
-// --old-- setSq(curRow,curCol,param2) // change sq we're leaving 
+// --old-- setSq(curRow,curCol,param2) // change sq we're leaving
 document.images["r"+curRow+"c"+curCol+"u"].src=param2
 
 
@@ -508,7 +520,7 @@ goalNumb = moveList[listPtr][4]
 if (testGoal(curRow,curCol)) {
 
   original = 9 + (curRow * 11) + curCol
-  board[curRow][curCol] = currentMaze[original] 
+  board[curRow][curCol] = currentMaze[original]
   setSq(curRow,curCol,"x")}
 
 document.images["r"+curRow+"c"+curCol+"u"].src="w/eyes"+curOrient+".gif"
@@ -520,7 +532,7 @@ if (param2 == "x") return
 document.images["todo"].src="w/todo"+goalNumb+".gif" // change todo sign
 
 bgCount = currentMaze[8] - goalNumb
-document.bgColor = bgArray[bgCount] // restore older BG color 
+document.bgColor = bgArray[bgCount] // restore older BG color
 bgAltered = 1
 return}
 
@@ -816,7 +828,8 @@ Start Maze &nbsp;<A HREF="javascript:startMaze(maze1,'u')">1</A> &nbsp; <A HREF=
 <IMG SRC="padding.gif" WIDTH=2 HEIGHT=15 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=BOTTOM><A HREF="javascript:startMaze(maze6,'u')">6</A> &nbsp; <A HREF="javascript:startMaze(maze7,'u')">7</A> &nbsp; <A HREF="javascript:startMaze(maze8,'u')">8</A> &nbsp; <A HREF="javascript:startMaze(maze9,'u')">9</A> &nbsp; <A HREF="javascript:startMaze(maze10,'u')">10</A> &nbsp; <A HREF="javascript:startMaze(maze11,'u')">11</A> &nbsp; <A HREF="javascript:startMaze(maze12,'u')">12</A> &nbsp; <A HREF="javascript:startMaze(maze13,'u')">13</A> <br><br>
 <a HREF="javascript:goBack()">Go back one move</a><br><br>
 
-<FORM><INPUT NAME="sound" TYPE=CHECKBOX CHECKED>Sound</FORM></h6>
+<!-- <FORM><INPUT NAME="sound" TYPE=CHECKBOX CHECKED>Sound</FORM> -->
+</h6>
 
 <A HREF=javascript:solve1()><IMG SRC="w/solu.gif" NAME="sol" WIDTH=125 HEIGHT=47 HSPACE=0 VSPACE=0 BORDER=0><br><br>
 </TD></TR>
@@ -868,7 +881,7 @@ Start Maze &nbsp;<A HREF="javascript:startMaze(maze1,'u')">1</A> &nbsp; <A HREF=
 <TD><IMG SRC="w/71x.gif" NAME="r4c7" class=lev0></TD>
 <TD><IMG SRC="w/71x.gif" NAME="r4c8" class=lev0></TD>
 <TD><IMG SRC="w/71x.gif" NAME="r4c9" class=lev0></TD>
-<TD><IMG SRC="w/70x.gif" NAME="r4c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR> 
+<TD><IMG SRC="w/70x.gif" NAME="r4c10" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0 ALIGN=LEFT></TD></TR>
 
 <TR><TD><IMG SRC="w/70x.gif" NAME="r5c0" WIDTH=1 HEIGHT=57 HSPACE=0 VSPACE=0 BORDER=0></TD>
 <TD><IMG SRC="w/72x.gif" NAME="r5c1" class=lev0></TD>
@@ -1017,7 +1030,7 @@ Start Maze &nbsp;<A HREF="javascript:startMaze(maze1,'u')">1</A> &nbsp; <A HREF=
 
 <div id=rules>
 
-<center> 
+<center>
 
 <TABLE BORDER=0 size=77% CELLPADDING=0 CELLSPACING=0><tr><td>
 
@@ -1044,12 +1057,11 @@ This picture shows something that appears only in Mazes&nbsp;12 and&nbsp;13: pur
 
 <p>The maze design and the JavaScript program is copyright &#169; 2003 by Robert Abbott. If you are interested in programming this game for a different device (PDA, cell phone, video game controller), please see my <A HREF="terms.html">terms of use</A>.</P>
 
-<p>My thanks to &#147;<a HREF="http://www.joker-games.com/">Joker</A>&#148; for supplying me with a Java applet that plays the sound files (I was having trouble getting JavaScript to play sound on all browsers).</P>
+<p><del>My thanks to &#147;<a HREF="http://www.joker-games.com/">Joker</A>&#148; for supplying me with a Java applet that plays the sound files (I was having trouble getting JavaScript to play sound on all browsers).</del> <ins style="background:yellow;">See maintainer's note below.</ins></P>
 
 <p>Also, thanks to Bobbie Jo Riddle for discovering what she realized was an unintended short solution&nbsp;to Maze 4. She knew it was a mistake because it was much too easy. I corrected that maze&nbsp;on 2/20/04.</p>
 
-<p><span>Note, July 7, 2008: &nbsp;</span>These mazes are currently being used as a contest by the Catalan Culture Ministry. The contest will last a couple of more months. Their version of the program is <A HREF="http://www.quellegeixes.cat/laberints/laberint">here</A> (note that they added a theme about books). If you are one of the few people who can understand Catalan, you can read about the contest <A HREF="http://www.quellegeixes.cat/laberints">here</A>.</p>  
-
+<p><span>Note, July 7, 2008: &nbsp;</span>These mazes are currently being used as a contest by the Catalan Culture Ministry. The contest will last a couple of more months. Their version of the program is <A HREF="http://www.quellegeixes.cat/laberints/laberint">here</A> (note that they added a theme about books). If you are one of the few people who can understand Catalan, you can read about the contest <A HREF="http://www.quellegeixes.cat/laberints">here</A>.</p>
 
 <P><HR></P>
 
@@ -1058,10 +1070,18 @@ This picture shows something that appears only in Mazes&nbsp;12 and&nbsp;13: pur
 </div>
 
 
-<applet code="AbbottSP.class" width=1 height=1>
+<div style="background:yellow;margin:1em;padding:1em;">
+    <h3>Maintainer's note - 2026-09-13:</h3>
+    <p>The sound effect functionality has been removed due to lack of browser support.</p>
+    <p>If you spot something broken, please reach out via
+    <a href="https://github.com/davmillar/logicmazes">GitHub issues or make a pull request</a>.</p>
+</div>
+
+
+<!-- <applet code="AbbottSP.class" width=1 height=1>
 <H1><FONT FACE=arial COLOR=RED>
 This program won't work because you need to have Java as well as JavaScript enabled.<BR><BR><BR><BR><BR><BR></H1>
-</applet>
+</applet> -->
 
 </BODY>
 </HTML>
